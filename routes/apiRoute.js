@@ -5,7 +5,7 @@ const apiControllerPost = require("../controllers/apiControllerPost");
 const apiControllerPut = require("../controllers/apiControllerPut");
 const apiControllerDelete = require("../controllers/apiControllerDelete");
 
-//! CRUD Operations
+//! CRUD Operations API
 
 // GET
 router.get("/users", apiControllerGet.apiUserGet);
@@ -24,9 +24,9 @@ router.put("/user/:id", apiControllerPut.apiUserIDPut);
 router.put("/blog/:id", apiControllerPut.apiBlogIDPut);
 router.put("/comment/:id", apiControllerPut.apiCommentIDPut);
 
-// // DELETE
-// router.delete("/user/:id", apiControllerDelete.apiUserIDDelete);
-// router.delete("/blog/:id", apiControllerDelete.apiBlogIDDelete);
-// router.delete("/comment/:id", apiControllerDelete.apiCommentIDDelete);
+// DELETE
+router.delete("/user/:id", apiControllerDelete.apiUserIDDelete);
+router.delete("/blog/:id", apiControllerDelete.apiBlogIDDelete);
+router.delete("/comment/:id", apiControllerDelete.apiCommentIDDelete);
 
 module.exports = router;

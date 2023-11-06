@@ -20,7 +20,7 @@ exports.apiBlogIDPut = asyncHandler(async function (req, res, next) {
   // Find and Update
   if (req.body.title) db.blogs[ID].title = req.body.title;
   if (req.body.text) db.blogs[ID].text = req.body.text;
-  res.status(200).json({ message: "Blog succesfully updated", "old blog": oldBlog, "new blogs": db.blogs[ID] });
+  res.status(204).json({ message: "Blog succesfully updated", "old blog": oldBlog, "new blogs": db.blogs[ID] });
 });
 
 exports.apiCommentIDPut = asyncHandler(async function (req, res, next) {
