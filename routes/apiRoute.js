@@ -25,8 +25,8 @@ router.put("/blog/:id", apiControllerPut.apiBlogIDPut);
 router.put("/comment/:id", apiControllerPut.apiCommentIDPut);
 
 // DELETE
-router.delete("/user/:id", apiControllerDelete.apiUserIDDelete);
-router.delete("/blog/:id", apiControllerDelete.apiBlogIDDelete);
-router.delete("/comment/:id", apiControllerDelete.apiCommentIDDelete);
+router.delete("/user/:id", apiControllerDelete.apiUserIDDeleteToggle);
+router.delete("/blog/:id", apiControllerDelete.apiBlogIDDeleteToggle);
+router.delete("/comment/:id", apiControllerDelete.apiCommentIDDeleteToggle);
 
 module.exports = router;
