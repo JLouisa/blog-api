@@ -3,3 +3,145 @@ extends layout
 block content
   h1= title
   p Welcome to #{title}
+  h2 Table of Contents
+  ul
+    li
+      a(href="#endpoints") Endpoints
+    li
+      a(href="#usage") Usage
+    li
+      a(href="#api-documentation") API Documentation
+
+  h2 Endpoints
+
+  h3 GET Endpoints
+  ul
+    li
+      a(href="#get-users") GET /api/users
+      |  - Retrieve a list of all users with their usernames and creation dates.
+    li
+      a(href="#get-user-id") GET /api/user/:id
+      |  - Retrieve information about a specific user by their ID.
+    li
+      a(href="#get-blogs") GET /api/blogs
+      |  - Retrieve a list of all blog posts.
+    li
+      a(href="#get-blog-id") GET /api/blog/:id
+      |  - Retrieve information about a specific blog post by its ID.
+    li
+      a(href="#get-blog-comments") GET /api/blog/:id/comments
+      |  - Retrieve comments for a specific blog post.
+
+  h3 POST Endpoints
+  ul
+    li
+      a(href="#post-user") POST /api/user
+      |  - Create a new user with a unique username and password confirmation.
+    li
+      a(href="#post-blog") POST /api/blog
+      |  - Create a new blog post with a title and text content.
+    li
+      a(href="#post-blog-comment") POST /api/blog/:id/comment
+      |  - Create a new comment on a specific blog post.
+
+  h3 PUT Endpoints
+  ul
+    li
+      a(href="#put-user-password") PUT /api/user/:id/password
+      |  - Update the user's password. Requires the current password for verification.
+    li
+      a(href="#put-blog-id") PUT /api/blog/:id
+      |  - Edit an existing blog post by its ID.
+    li
+      a(href="#put-comment-id") PUT /api/comment/:id
+      |  - Edit an existing comment by its ID.
+
+  h3 DELETE Endpoints
+  ul
+    li
+      a(href="#delete-user-id") DELETE /api/user/:id
+      |  - Delete or undelete a user by their ID, toggling the user's status.
+    li
+      a(href="#delete-blog-id") DELETE /api/blog/:id
+      |  - Delete or undelete a blog post by its ID, toggling the post's status.
+    li
+      a(href="#delete-comment-id") DELETE /api/comment/:id
+      |  - Delete or undelete a comment by its ID, toggling the comment's status.
+
+
+  h2 Usage
+
+  p
+    | To use this API, you can make HTTP requests to the listed endpoints using your preferred tools or libraries. You may need to set up your local development environment, including Node.js and MongoDB, to run the server.
+
+  p
+    | Here's how you can get started:
+
+  ol
+    li Clone this repository.
+    li Install dependencies: npm install
+    li Configure the environment variables and database connection.
+    li Start the server: npm start
+
+  p
+    | Make sure to set up and run the frontend of your application to interact with this API.
+
+  h2 API Documentation
+
+  h2 GET Endpoints
+  ul
+    li
+      | GET /api/users
+      |  - Retrieve a list of users with their usernames and creation dates.
+    li
+      | GET /api/user/:id
+      |  - Retrieve a specific user by their ID.
+    li
+      | GET /api/blogs
+      |  - Retrieve a list of blog posts.
+    li
+      | GET /api/blog/:id
+      |  - Retrieve a specific blog post by its ID.
+    li
+      | GET /api/blog/:id/comments
+      |  - Retrieve the comments for a specific blog post.
+
+  h2 POST Endpoints
+  ul
+    li
+      | POST /api/user
+      |  - Create a new user with a username and password.
+    li
+      | POST /api/blog
+      |  - Create a new blog post with a title and text.
+    li
+      | POST /api/blog/:id/comment
+      |  - Add a new comment to a specific blog post.
+
+  h2 PUT Endpoints
+  ul
+    li
+      | PUT /api/user/:id/password
+      |  - Update a user's password.
+    li
+      | PUT /api/blog/:id
+      |  - Edit the title and text of a specific blog post.
+    li
+      | PUT /api/comment/:id
+      |  - Edit the text of a specific comment.
+
+  h2 DELETE Endpoints
+  ul
+    li
+      | DELETE /api/user/:id
+      |  - Delete or undelete a user by their ID, toggling the user's status.
+    li
+      | DELETE /api/blog/:id
+      |  - Delete or undelete a blog post by its ID, toggling the post's status.
+    li
+      | DELETE /api/comment/:id
+      |  - Delete or undelete a comment by its ID, toggling the comment's status.
+
+  h2 Summary
+  p
+    | This API provides various endpoints for interacting with a blog website. You can perform operations related to users, blogs, and comments. Below, you'll find detailed information about each endpoint.
