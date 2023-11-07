@@ -20,7 +20,7 @@ router.post("/blog", apiControllerPost.apiBlogPost);
 router.post("/blog/:id/comment", apiControllerPost.apiCommentPost);
 
 // PUT
-router.put("/user/:id", apiControllerPut.apiUserIDPut);
+router.put("/user/:id/password", apiControllerPut.apiUserIDPassPut); //Needs to be updated
 router.put("/blog/:id", apiControllerPut.apiBlogIDPut);
 router.put("/comment/:id", apiControllerPut.apiCommentIDPut);
 

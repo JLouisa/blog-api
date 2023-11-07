@@ -51,7 +51,7 @@ async function popUsers() {
   console.log("Adding users");
   await Promise.all([
     usersCreate(0, "adamthefirst", "apple", false),
-    usersCreate(1, "johndoe123", "12345", false),
+    usersCreate(1, "johndoe123", "theapples123", false),
     usersCreate(2, "janesmith456", "password123", false),
     usersCreate(3, "michaelj", "testpass", false),
     usersCreate(4, "emilyb", "securepwd", false),

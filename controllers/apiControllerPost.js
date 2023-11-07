@@ -5,6 +5,7 @@ const UserCollection = require("../models/userModel");
 const BlogCollection = require("../models/blogModel");
 const CommentCollection = require("../models/commentModel");
 const { createUser } = require("../config/createModel");
+const dotenv = require("dotenv").config();
 
 // Init fake DB
 const mockDB = require("../database/mockDB");
@@ -64,7 +65,8 @@ exports.apiUserPost = [
       return;
     } else {
       console.log("Validation successful");
-      createUser(req.body.username, req.body.password, false, false).catch((err) => console.log(err));
+      const hashedPassword = await bcrypt.hash(password, +process.env.HASH_NUM);
+      createUser(req.body.username, hashedPassword, false, false).catch((err) => console.log(err));
       res.status(201).json({ message: "User succesfully created" });
     }
   }),
@@ -158,7 +160,7 @@ exports.apiCommentPost = [
       const newComment = new CommentCollection({
         text: req.body.commentText,
         createdByUser: req.body.user,
-        // createdByUser: req.body.user._id,
+        // createdByUser: req.user._id,
         createdOnPost: ID,
       });
       await newComment.save();
