@@ -11,8 +11,8 @@ const apiControllerDelete = require("../controllers/apiControllerDelete");
 router.get("/users", apiControllerGet.apiUserGet);
 router.get("/user/:id", apiControllerGet.apiUserIDGet);
 router.get("/blogs", apiControllerGet.apiBlogsGet);
+router.get("/blog/:id/comments", apiControllerGet.apiCommentGet);
 router.get("/blog/:id", apiControllerGet.apiBlogsIDGet);
-router.get("/comments", apiControllerGet.apiCommentGet);
 
 // POST
 router.post("/user", apiControllerPost.apiUserPost);

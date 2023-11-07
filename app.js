@@ -3,12 +3,18 @@ const express = require("express");
 const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
+const dotenv = require("dotenv").config();
+const { connectToDatabase } = require("./config/mongDB");
+const bcrypt = require("bcryptjs");
 
 const indexRouter = require("./routes/indexRoute");
 const apiRouter = require("./routes/apiRoute");
 const usersRouter = require("./routes/usersRoute");
 
 const app = express();
+
+// init MongoDB Database
+connectToDatabase();
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));

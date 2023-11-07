@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const { DateTime } = require("luxon");
 
-const PostSchema = new Schema({
+const BlogSchema = new Schema({
   title: { type: String, required: true },
   text: { type: String, required: true },
   createdDate: { type: Date, default: Date.now },
@@ -11,11 +11,11 @@ const PostSchema = new Schema({
 });
 
 // Virtual for post's URL
-PostSchema.virtual("url").get(function () {
-  return `/post/${this._id}`;
+BlogSchema.virtual("url").get(function () {
+  return `/blog/${this._id}`;
 });
 
-PostSchema.virtual("createdDate_formatted").get(function () {
+BlogSchema.virtual("createdDate_formatted").get(function () {
   return DateTime.fromJSDate(this.createdDate).toLocaleString({
     year: "numeric",
     month: "short",
@@ -25,4 +25,4 @@ PostSchema.virtual("createdDate_formatted").get(function () {
   });
 });
 
-module.exports = mongoose.model("Post", PostSchema);
+module.exports = mongoose.model("Blog", BlogSchema);
