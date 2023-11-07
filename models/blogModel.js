@@ -5,8 +5,8 @@ const { DateTime } = require("luxon");
 const BlogSchema = new Schema({
   title: { type: String, required: true },
   text: { type: String, required: true },
-  createdDate: { type: Date, default: Date.now },
   createdByUser: { type: Schema.Types.ObjectId, ref: "User", required: true },
+  createdDate: { type: Date, default: Date.now },
   isHidden: { type: Boolean, default: false },
 });
 
