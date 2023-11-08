@@ -1,6 +1,6 @@
 import Nav from "./components/Nav";
-import Main from "./components/Main";
 import Footer from "./components/Footer";
+import { Outlet } from "react-router-dom";
 
 import "./styles/App.css";
 
@@ -8,7 +8,9 @@ function App() {
   return (
     <>
       <Nav />
-      <Main />
+      <main>
+        <Outlet />
+      </main>
       <Footer />
     </>
   );

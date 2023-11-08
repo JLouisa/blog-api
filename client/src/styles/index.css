@@ -1,4 +1,5 @@
 :root {
+  --frameColor: #333;
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
@@ -25,8 +26,8 @@ a:hover {
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
+  /* display: flex;
+  place-items: center; */
   min-width: 320px;
   min-height: 100vh;
 }
@@ -66,4 +67,32 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+}
+
+/* ================================ */
+
+nav {
+  border-bottom: 2px solid var(--frameColor);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.menuLinks {
+  display: flex;
+  gap: 1em;
+}
+
+main {
+  margin: 2em;
+  min-height: 80vh;
+}
+
+footer {
+  border-top: 2px solid var(--frameColor);
+  padding: 1em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1em;
 }
