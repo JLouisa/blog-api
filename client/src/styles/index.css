@@ -1,5 +1,6 @@
 :root {
   --frameColor: #333;
+  --fontColor: #213547;
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
@@ -17,7 +18,7 @@
 
 a {
   font-weight: 500;
-  color: #646cff;
+  color: var(--fontColor);
   text-decoration: inherit;
 }
 a:hover {
@@ -69,7 +70,7 @@ button:focus-visible {
   }
 }
 
-/* ================================ */
+/* ===============Frame================= */
 
 nav {
   border-bottom: 2px solid var(--frameColor);
@@ -81,6 +82,10 @@ nav {
 .menuLinks {
   display: flex;
   gap: 1em;
+}
+
+.menuLinks a {
+  color: #007bff;
 }
 
 main {
@@ -95,4 +100,32 @@ footer {
   justify-content: center;
   align-items: center;
   gap: 1em;
+}
+
+/* =======Components======== */
+.blogs,
+.comment {
+  border: 1px solid black;
+  border-radius: 15px;
+  box-shadow: 1px 2px 5px, solid rgba(0, 0, 0, 0.155);
+  margin: 1em;
+}
+
+.btn {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none;
+  text-align: center;
+  font-size: 16px;
+  font-weight: bold;
+  margin: 0.2em;
+}
+
+.btn:hover {
+  background-color: #0056b3;
 }

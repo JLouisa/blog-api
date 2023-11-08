@@ -4,7 +4,7 @@ import localHost from "./localHost";
 import PropTypes from "prop-types";
 
 function Home({ setBlog }) {
-  const [blogs, setBlogs] = useState([]);
+  const [blogs, setBlogs] = useState(0);
 
   useEffect(() => {
     const fetchApiBlogs = async () => {
@@ -28,6 +28,9 @@ function Home({ setBlog }) {
   const blogHandler = (blog) => {
     setBlog(blog);
   };
+
+  if (blogs === 0) return <p>Loading Blogs...</p>;
+
   return (
     <section>
       {blogs.map((blog) => {

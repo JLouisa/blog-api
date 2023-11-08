@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 import { useState, useEffect } from "react";
 import localHost from "./localHost";
 import CommentCreate from "./CommentCreate";
+import formattedDate from "./formattedDate";
 
 function Comment({ blog }) {
   const [comments, setComments] = useState(0);
@@ -26,13 +27,13 @@ function Comment({ blog }) {
   return (
     <>
       <div>
-        <CommentCreate />
+        <CommentCreate blogID={blog._id} comments={comments} />
       </div>
       {comments.map((comment) => {
         return (
-          <div key={comment._id}>
+          <div key={comment._id} className="comment">
             <p>
-              {comment.createdByUser} - {comment.createdDate}
+              {comment.createdByUser} - {formattedDate(comment.createdDate)}
             </p>
             <p>{comment.text}</p>
           </div>

@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "http-proxy-middleware": "^2.0.6",
+    "luxon": "^3.4.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.18.0"

@@ -4,8 +4,8 @@ import PropTypes from "prop-types";
 function Blog({ blog }) {
   return (
     <section>
-      <h1>{blog._id}</h1>
-      <h2>{blog.title}</h2>
+      <h1>{blog.title}</h1>
+      <h2>{blog._id}</h2>
       <p>{blog.text}</p>
       <Comment blog={blog} />
     </section>

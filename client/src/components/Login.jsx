@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 function Login() {
   return (
     <>
@@ -12,6 +14,12 @@ function Login() {
             <label htmlFor="password">Password: </label>
             <br />
             <input type="text" name="password" id="password" />
+          </div>
+          <div>
+            <input type="submit" className="btn" value="login" />
+            <Link to="/home">
+              <button className="btn">Cancel</button>
+            </Link>
           </div>
         </form>
       </div>
