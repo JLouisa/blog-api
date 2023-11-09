@@ -3,19 +3,21 @@ import App from "../App";
 import Blog from "./Blog.jsx";
 import Home from "./Home.jsx";
 import Login from "./Login.jsx";
+import SignUp from "./SignUp.jsx";
 import { useState } from "react";
 
 const Router = () => {
-  const [blog, setBlog] = useState([]);
+  const [isLogin, setIsLogin] = useState(false);
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <App />,
+      element: <App isLogin={isLogin} />,
       children: [
         { path: "", element: <Navigate to="/home" /> },
-        { path: "/home", element: <Home setBlog={setBlog} /> },
-        { path: "/login", element: <Login /> },
-        { path: "/blog/:id", element: <Blog blog={blog} /> },
+        { path: "/home", element: <Home isLogin={isLogin} /> },
+        { path: "/signup", element: <SignUp /> },
+        { path: "/login", element: <Login isLogin={isLogin} setIsLogin={setIsLogin} redirect={true} /> },
+        { path: "/blog/:id", element: <Blog isLogin={isLogin} setIsLogin={setIsLogin} /> },
       ],
     },
   ]);

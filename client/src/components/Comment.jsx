@@ -3,13 +3,13 @@ import CommentCreate from "./CommentCreate";
 import formattedDate from "./formattedDate";
 import userProfile from "../assets/profile-user3.png";
 
-function Comment({ id, comments }) {
+function Comment({ id, comments, isLogin, setIsLogin }) {
   if (comments === 0) return <div>Loading...</div>;
 
   return (
     <>
       <div>
-        <CommentCreate blogID={id} comments={comments} />
+        <CommentCreate blogID={id} comments={comments} isLogin={isLogin} setIsLogin={setIsLogin} />
       </div>
       {comments.map((comment) => {
         return (
@@ -29,6 +29,8 @@ function Comment({ id, comments }) {
 Comment.propTypes = {
   comments: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
   id: PropTypes.string,
+  isLogin: PropTypes.bool,
+  setIsLogin: PropTypes.func,
 };
 
 export default Comment;

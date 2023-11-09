@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import localHost from "./localHost";
 import BlogContent from "./BlogContent";
 
-function Blog() {
+function Blog({ isLogin, setIsLogin }) {
   const { id } = useParams();
   const [blog, setBlog] = useState(0);
   const [comments, setComments] = useState(0);
@@ -41,7 +41,7 @@ function Blog() {
         <BlogContent content={blog[0].text} />
       </div>
       <div className="commentSection">
-        <Comment id={id} comments={comments} />
+        <Comment id={id} comments={comments} isLogin={isLogin} setIsLogin={setIsLogin} />
       </div>
     </section>
   );
@@ -49,6 +49,8 @@ function Blog() {
 
 Blog.propTypes = {
   blog: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
+  isLogin: PropTypes.bool,
+  setIsLogin: PropTypes.func,
 };
 
 export default Blog;

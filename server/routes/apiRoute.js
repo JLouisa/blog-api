@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const { isAuth } = require("../config/auth");
 const apiControllerGet = require("../controllers/apiControllerGet");
 const apiControllerPost = require("../controllers/apiControllerPost");
 const apiControllerPut = require("../controllers/apiControllerPut");
@@ -8,7 +9,7 @@ const apiControllerDelete = require("../controllers/apiControllerDelete");
 //! CRUD Operations API
 
 // GET
-router.get("/users", apiControllerGet.apiUserGet);
+router.get("/users", isAuth, apiControllerGet.apiUserGet);
 router.get("/user/:id", apiControllerGet.apiUserIDGet);
 router.get("/blogs", apiControllerGet.apiBlogsGet);
 router.get("/blog/:id/comments", apiControllerGet.apiCommentGet);

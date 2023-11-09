@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import localHost from "./localHost";
 import PropTypes from "prop-types";
 
-function Home({ setBlog }) {
+function Home({ isLogin }) {
   const [blogs, setBlogs] = useState(0);
   const [showMore, setShowMore] = useState(5);
 
@@ -39,9 +39,6 @@ function Home({ setBlog }) {
     };
     fetchApiBlogs();
   }, []);
-  const blogHandler = (blog) => {
-    setBlog(blog);
-  };
 
   const theBlogs = (blogs) => {
     const visibleBlogs = blogs.slice(0, showMore);
@@ -50,7 +47,7 @@ function Home({ setBlog }) {
       <>
         {visibleBlogs.map((blog) => (
           <div key={blog._id} className="blogs">
-            <Link to={"/blog/" + blog._id} onClick={() => blogHandler(blog)}>
+            <Link to={"/blog/" + blog._id}>
               <p>{blog.title}</p>
               <>{blogLength(blog.text)}</>
             </Link>
@@ -81,6 +78,7 @@ function Home({ setBlog }) {
 
 Home.propTypes = {
   setBlog: PropTypes.func,
+  isLogin: PropTypes.bool,
 };
 
 export default Home;

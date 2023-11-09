@@ -1,5 +1,6 @@
 const asyncHandler = require("express-async-handler");
 const mongoose = require("mongoose");
+const jwt = require("jsonwebtoken");
 const UserCollection = require("../models/userModel");
 const BlogCollection = require("../models/blogModel");
 const CommentCollection = require("../models/commentModel");
@@ -9,6 +10,13 @@ const mockDB = require("../database/mockDB");
 const db = mockDB.createMockDB();
 
 exports.apiUserGet = asyncHandler(async function (req, res, next) {
+  jwt.verify(req.token, process.env.SECRET_JWT_KEY, (err, decoded) => {
+    if (err) {
+      return res.sendStatus(403);
+    } else {
+      console.log(decoded.foo); // bar
+    }
+  });
   const users = await UserCollection.find({}, "username createdDate").exec();
   res.status(200).json({ data: users });
 });

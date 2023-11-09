@@ -2,9 +2,9 @@ import { useState } from "react";
 import PropTypes from "prop-types";
 import Login from "./Login";
 
-function CommentCreate({ blogID, comments }) {
+function CommentCreate({ blogID, comments, isLogin, setIsLogin }) {
+  console.log(isLogin);
   const [showCommentArea, setShowCommentArea] = useState(false);
-  const [showLogin, setShowLogin] = useState(false);
 
   const showCommentHandler = () => {
     setShowCommentArea(!showCommentArea);
@@ -21,10 +21,10 @@ function CommentCreate({ blogID, comments }) {
       </>
     );
   }
-  if (showLogin === false) {
+  if (isLogin === false) {
     return (
       <>
-        <Login link={`/blog/${blogID}`} />
+        <Login link={`/blog/${blogID}`} setIsLogin={setIsLogin} redirect={false} />
       </>
     );
   }
@@ -52,6 +52,8 @@ function CommentCreate({ blogID, comments }) {
 CommentCreate.propTypes = {
   blogID: PropTypes.string,
   comments: PropTypes.array,
+  isLogin: PropTypes.bool,
+  setIsLogin: PropTypes.func,
 };
 
 export default CommentCreate;

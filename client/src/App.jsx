@@ -1,13 +1,13 @@
 import Nav from "./components/Nav";
 import Footer from "./components/Footer";
 import { Outlet } from "react-router-dom";
-
+import PropTypes from "prop-types";
 import "./styles/App.css";
 
-function App() {
+function App({ isLogin, setIsLogin }) {
   return (
     <>
-      <Nav />
+      <Nav isLogin={isLogin} setIsLogin={setIsLogin} />
       <main>
         <Outlet />
       </main>
@@ -15,5 +15,10 @@ function App() {
     </>
   );
 }
+
+App.propTypes = {
+  isLogin: PropTypes.bool,
+  setIsLogin: PropTypes.func,
+};
 
 export default App;
