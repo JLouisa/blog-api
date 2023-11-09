@@ -1,8 +1,10 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
+import Login from "./Login";
 
 function CommentCreate({ blogID, comments }) {
   const [showCommentArea, setShowCommentArea] = useState(false);
+  const [showLogin, setShowLogin] = useState(false);
 
   const showCommentHandler = () => {
     setShowCommentArea(!showCommentArea);
@@ -16,6 +18,13 @@ function CommentCreate({ blogID, comments }) {
             {comments.length === 0 ? "Be the first to comment!" : "Place a comment"}
           </button>
         </div>
+      </>
+    );
+  }
+  if (showLogin === false) {
+    return (
+      <>
+        <Login link={`/blog/${blogID}`} />
       </>
     );
   }

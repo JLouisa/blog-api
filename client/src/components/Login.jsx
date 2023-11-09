@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 
-function Login() {
+function Login({ link = "/home" }) {
   return (
     <>
       <div>
@@ -17,7 +18,7 @@ function Login() {
           </div>
           <div>
             <input type="submit" className="btn" value="login" />
-            <Link to="/home">
+            <Link to={link}>
               <button className="btn">Cancel</button>
             </Link>
           </div>
@@ -26,5 +27,9 @@ function Login() {
     </>
   );
 }
+
+Login.propTypes = {
+  link: PropTypes.string,
+};
 
 export default Login;

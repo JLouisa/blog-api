@@ -5,6 +5,20 @@ import PropTypes from "prop-types";
 
 function Home({ setBlog }) {
   const [blogs, setBlogs] = useState(0);
+  const [showMore, setShowMore] = useState(5);
+
+  const blogLength = (title) => {
+    let newTitle = title;
+    if (newTitle.length > 300) {
+      return (
+        <>
+          <p>{newTitle.substring(0, 300) + "..."}</p>
+          <p>Show more ⌄</p>
+        </>
+      );
+    }
+    return newTitle;
+  };
 
   useEffect(() => {
     const fetchApiBlogs = async () => {
@@ -29,20 +43,38 @@ function Home({ setBlog }) {
     setBlog(blog);
   };
 
+  const theBlogs = (blogs) => {
+    const visibleBlogs = blogs.slice(0, showMore);
+
+    return (
+      <>
+        {visibleBlogs.map((blog) => (
+          <div key={blog._id} className="blogs">
+            <Link to={"/blog/" + blog._id} onClick={() => blogHandler(blog)}>
+              <p>{blog.title}</p>
+              <>{blogLength(blog.text)}</>
+            </Link>
+          </div>
+        ))}
+      </>
+    );
+  };
+
   if (blogs === 0) return <p>Loading Blogs...</p>;
 
   return (
     <section>
-      {blogs.map((blog) => {
-        return (
-          <div key={blog._id} className="blogs">
-            <Link to={"/blog/" + blog._id} onClick={() => blogHandler(blog)}>
-              <p>{blog.title}</p>
-              <p>{blog.text}</p>
-            </Link>
-          </div>
-        );
-      })}
+      <div>{theBlogs(blogs)}</div>
+      {showMore < blogs.length && (
+        <div
+          className="showMore"
+          onClick={() => {
+            setShowMore(showMore + 5);
+          }}
+        >
+          Show More
+        </div>
+      )}
     </section>
   );
 }
