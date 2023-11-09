@@ -6,6 +6,23 @@ import formattedDate from "./formattedDate";
 
 function Comment({ blog }) {
   const [comments, setComments] = useState(0);
+  const [users, setUsers] = useState(0);
+
+  // const getUserNames = async (arr) => {
+  //   try {
+  //     const arrPromises = arr.map(async (user) => {
+  //       const response = await fetch(`${localHost}/v1/api/user/${user.createdByUser}`);
+  //       const data = await response.json();
+  //       return data;
+  //     });
+
+  //     const names = await Promise.all(arrPromises);
+  //     console.log("names", names);
+  //     setUsers(names);
+  //   } catch (error) {
+  //     console.error("Error fetching user names:", error);
+  //   }
+  // };
 
   useEffect(() => {
     const getComments = async () => {
@@ -17,11 +34,12 @@ function Comment({ blog }) {
         },
       });
       const blogComments = await blogCommentsData.json();
+      console.log(blogComments.data[1]);
       setComments(blogComments.data[1]);
+      // getUserNames(blogComments.data[1]);
     };
     getComments();
   }, []);
-  console.log(comments);
   if (comments === 0) return <div>Loading...</div>;
 
   return (
@@ -33,7 +51,7 @@ function Comment({ blog }) {
         return (
           <div key={comment._id} className="comment">
             <p>
-              {comment.createdByUser} - {formattedDate(comment.createdDate)}
+              {comment.createdByUser.username} - {formattedDate(comment.createdDate)}
             </p>
             <p>{comment.text}</p>
           </div>

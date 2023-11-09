@@ -35,7 +35,7 @@ exports.apiCommentGet = asyncHandler(async function (req, res, next) {
   const ID = req.params.id;
   const [blog, comments] = await Promise.all([
     BlogCollection.find({ _id: ID }).exec(),
-    CommentCollection.find({ createdOnPost: ID }),
+    CommentCollection.find({ createdOnPost: ID }).populate("createdByUser"),
   ]);
   res.status(200).json({ data: [blog, comments] });
 });
