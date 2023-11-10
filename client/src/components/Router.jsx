@@ -4,6 +4,7 @@ import Blog from "./Blog.jsx";
 import Home from "./Home.jsx";
 import Login from "./Login.jsx";
 import SignUp from "./SignUp.jsx";
+import Users from "./Users.jsx";
 import { useState, useEffect } from "react";
 
 const Router = () => {
@@ -23,6 +24,8 @@ const Router = () => {
       children: [
         { path: "", element: <Navigate to="/home" /> },
         { path: "/home", element: <Home isLogin={isLogin} /> },
+        { path: "/signup", element: <SignUp /> },
+        { path: "/users", element: <Users /> },
         { path: "/signup", element: <SignUp /> },
         {
           path: "/login",

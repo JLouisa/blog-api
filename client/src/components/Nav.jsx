@@ -29,9 +29,17 @@ function Nav({ isLogin, setIsLogin }) {
               </Link>
             </>
           ) : (
-            <span onClick={logoutHandler}>
-              <a href="">Logout</a>
-            </span>
+            <>
+              <Link to="/users">
+                <span>Users</span>
+              </Link>
+              <Link to="/createBlog">
+                <span>Create Blog</span>
+              </Link>
+              <span onClick={logoutHandler}>
+                <a href="">Logout</a>
+              </span>
+            </>
           )}
         </div>
       </nav>

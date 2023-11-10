@@ -218,3 +218,10 @@ textarea:focus {
 .errors {
   color: crimson;
 }
+
+/* ================Users================ */
+.userSection {
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-template-columns: repeat(2, 1fr);
+}
