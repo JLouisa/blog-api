@@ -28,8 +28,7 @@ exports.apiUserIDGet = asyncHandler(async function (req, res, next) {
 });
 
 exports.apiBlogsGet = asyncHandler(async function (req, res, next) {
-  const ID = req.params.id;
-  const blogs = await BlogCollection.find({}).exec();
+  const blogs = await BlogCollection.find({}).sort({ createdDate: -1 }).exec();
   res.status(200).json({ data: blogs });
 });
 

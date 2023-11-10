@@ -97,8 +97,8 @@ exports.apiBlogPost = [
     .notEmpty()
     .withMessage("Text must not be empty")
     .trim()
-    .isLength({ min: 2, max: 500 })
-    .withMessage("Text must be between 2 and 500 characters")
+    .isLength({ min: 2, max: 2000 })
+    .withMessage("Text must be between 2 and 2000 characters")
     .escape(),
 
   // Process request after validation and sanitization.
@@ -126,7 +126,7 @@ exports.apiBlogPost = [
         // createdByUser: req.user._id,
       });
       await newBlog.save();
-      res.status(201).json({ message: "Blog succesfully created" });
+      res.status(201).json({ data: newBlog, message: "Blog succesfully created" });
     }
   }),
 ];
