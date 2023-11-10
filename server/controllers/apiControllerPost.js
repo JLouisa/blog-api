@@ -168,10 +168,11 @@ exports.apiCommentPost = [
       return;
     } else {
       console.log("Validation successful");
+      console.log("req.body");
+      console.log(req.body);
       const newComment = new CommentCollection({
         text: req.body.commentText,
-        createdByUser: req.body.user,
-        // createdByUser: req.user._id,
+        createdByUser: req.body.id,
         createdOnPost: ID,
       });
       await newComment.save();

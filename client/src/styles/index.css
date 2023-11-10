@@ -223,5 +223,27 @@ textarea:focus {
 .userSection {
   display: grid;
   grid-template-rows: 1fr;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(4, 1fr);
+}
+
+/* ==========Input============= */
+input {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  outline: none;
+  transition: border-color 0.3s ease-in-out;
+  margin-bottom: 1em;
+}
+
+/* Add a subtle hover effect */
+input:hover {
+  border-color: #555;
+}
+
+/* Add a more pronounced focus effect */
+input:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
 }

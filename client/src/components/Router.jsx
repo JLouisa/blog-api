@@ -5,6 +5,7 @@ import Home from "./Home.jsx";
 import Login from "./Login.jsx";
 import SignUp from "./SignUp.jsx";
 import Users from "./Users.jsx";
+import CreateBlog from "./CreateBlog.jsx";
 import { useState, useEffect } from "react";
 
 const Router = () => {
@@ -26,7 +27,7 @@ const Router = () => {
         { path: "/home", element: <Home isLogin={isLogin} /> },
         { path: "/signup", element: <SignUp /> },
         { path: "/users", element: <Users /> },
-        { path: "/signup", element: <SignUp /> },
+        { path: "/create-blog", element: <CreateBlog /> },
         {
           path: "/login",
           element: <Login isLogin={isLogin} setIsLogin={setIsLogin} redirect={true} />,

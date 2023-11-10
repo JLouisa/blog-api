@@ -33,7 +33,7 @@ function Nav({ isLogin, setIsLogin }) {
               <Link to="/users">
                 <span>Users</span>
               </Link>
-              <Link to="/createBlog">
+              <Link to="/create-blog">
                 <span>Create Blog</span>
               </Link>
               <span onClick={logoutHandler}>

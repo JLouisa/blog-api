@@ -209,3 +209,26 @@ exports.apiCommentIDPut = [
     }
   }),
 ];
+
+//! Make admin
+exports.apiUserIDAdminPutToggle = asyncHandler(async function (req, res, next) {
+  try {
+    const ID = req.params.id;
+    const user = await UserCollection.findOne({ _id: ID });
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    // Toggle the user's isAdmin property
+    user.isAdmin = !user.isAdmin;
+    await user.save();
+
+    // Response message
+    const action = user.isAdmin ? "an admin" : "not an admin";
+    res.status(200).json({ message: `User is ${action}` });
+  } catch (error) {
+    console.error("Error toggling user admin promotion:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+});

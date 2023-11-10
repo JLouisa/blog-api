@@ -1,13 +1,66 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
 import Login from "./Login";
+import localHost from "./localHost";
+import { useNavigate } from "react-router-dom";
 
 function CommentCreate({ blogID, comments, isLogin, setIsLogin }) {
   console.log(isLogin);
+  const navigateTo = useNavigate();
+  const [theErrors, setTheErrors] = useState([]);
+
   const [showCommentArea, setShowCommentArea] = useState(false);
 
   const showCommentHandler = () => {
     setShowCommentArea(!showCommentArea);
+  };
+
+  //   const [title, setTitle] = useState("");
+  const submitHandler = async () => {
+    event.preventDefault();
+    const commentText = document.getElementById("commentText").value;
+    const userData = { commentText };
+    console.log("userData");
+    console.log(userData);
+
+    try {
+      const token = localStorage.getItem("projectX");
+      const response = await fetch(`${localHost}/v1/api/blog/${blogID}/comment`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(userData),
+      });
+
+      // Handle the response as needed
+      if (response.ok) {
+        const data = await response.json();
+        const redirect = true;
+        // Successful sign-up, redirect
+        console.log("Comment created succesfull");
+        console.log(response);
+        console.log(data);
+        if (redirect) {
+          navigateTo(`/blog/${blogID}`); // Redirect
+          window.location.reload(true);
+        }
+      } else {
+        const responseData = await response.json();
+        if (responseData.data.errors) {
+          console.log(responseData.data.errors);
+          setTheErrors(responseData.data.errors);
+        } else {
+          console.error("Unexpected response format:", responseData);
+          setTheErrors(["Unexpected response format:", responseData.data.errors]);
+        }
+      }
+    } catch (error) {
+      console.error("Error during comment:", error);
+      // Handle the error, display a message, or redirect if necessary
+      setTheErrors(["Error during comment:", error]);
+    }
   };
 
   if (showCommentArea === false) {
@@ -30,12 +83,21 @@ function CommentCreate({ blogID, comments, isLogin, setIsLogin }) {
   }
   return (
     <>
+      {theErrors
+        ? theErrors.map((error) => {
+            return (
+              <p key={error.msg} className="errors">
+                {error.msg}
+              </p>
+            );
+          })
+        : null}
       <div>
-        <form action={`/api/blog/${blogID}/comment`} method="POST">
+        <form action="" method="POST" onSubmit={submitHandler}>
           <div>
-            <label htmlFor="comment">Place your Comments</label>
+            <label htmlFor="commentText">Place your Comments</label>
             <br />
-            <textarea name="comment" id="comment" cols="70" rows="10" placeholder="Add a comment"></textarea>
+            <textarea name="commentText" id="commentText" cols="70" rows="10" placeholder="Add a comment"></textarea>
           </div>
           <div>
             <input type="submit" value="Comment" className="btn" />

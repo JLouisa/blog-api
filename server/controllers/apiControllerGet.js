@@ -10,14 +10,7 @@ const mockDB = require("../database/mockDB");
 const db = mockDB.createMockDB();
 
 exports.apiUserGet = asyncHandler(async function (req, res, next) {
-  jwt.verify(req.token, process.env.SECRET_JWT_KEY, (err, decoded) => {
-    if (err) {
-      return res.sendStatus(403);
-    } else {
-      console.log(decoded.foo); // bar
-    }
-  });
-  const users = await UserCollection.find({}, "username createdDate").exec();
+  const users = await UserCollection.find({}, "username createdDate isAdmin isSuspended").exec();
   res.status(200).json({ data: users });
 });
 
@@ -42,7 +35,7 @@ exports.apiCommentGet = asyncHandler(async function (req, res, next) {
   const ID = req.params.id;
   const [blog, comments] = await Promise.all([
     BlogCollection.find({ _id: ID }).exec(),
-    CommentCollection.find({ createdOnPost: ID }).populate("createdByUser"),
+    CommentCollection.find({ createdOnPost: ID }).populate("createdByUser").sort({ createdDate: -1 }).exec(),
   ]);
   res.status(200).json({ data: [blog, comments] });
 });
