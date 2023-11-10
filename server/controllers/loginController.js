@@ -27,7 +27,7 @@ exports.loginPost = asyncHandler(async function (req, res, next) {
         console.error("JWT Sign Error:", err);
         return res.status(500).json({ msg: "Problem signing in" });
       }
-      res.status(200).json({ isAdmin: user.isAdmin, projectX: token });
+      res.status(200).json({ user: { id: user.id, isAdmin: user.isAdmin }, projectX: token });
     });
   } catch (err) {
     console.error("Couldn't setup user login:", err);

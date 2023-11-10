@@ -9,9 +9,9 @@ const apiControllerDelete = require("../controllers/apiControllerDelete");
 //! CRUD Operations API
 
 // GET
-router.get("/users", isAuth, isAdmin, apiControllerGet.apiUserGet);
 router.get("/user/admin", isAuth, isVerified);
-// router.get("/user/admin", isVerified, apiControllerGet.apiUserIsAdminGet);
+router.get("/users", isAuth, isAdmin, apiControllerGet.apiUserGet);
+router.get("/user", isAuth, isMember, apiControllerGet.apiUserGet);
 router.get("/user/:id", apiControllerGet.apiUserIDGet);
 router.get("/blogs", apiControllerGet.apiBlogsGet);
 router.get("/blog/:id/comments", apiControllerGet.apiCommentGet);

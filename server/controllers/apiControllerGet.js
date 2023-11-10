@@ -22,6 +22,12 @@ exports.apiUserIsAdminGet = asyncHandler(async function (req, res, next) {
   }
 });
 
+exports.apiUserGet = asyncHandler(async function (req, res, next) {
+  const ID = req.body.id;
+  const user = await UserCollection.findOne({ _id: ID }, "_id username createdDate isAdmin isSuspended").exec();
+  res.status(200).json({ data: user });
+});
+
 exports.apiUserIDGet = asyncHandler(async function (req, res, next) {
   const ID = req.params.id;
   const user = await UserCollection.find({ _id: ID }).exec();

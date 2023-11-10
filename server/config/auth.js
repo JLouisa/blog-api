@@ -49,7 +49,7 @@ module.exports = {
   isMember: function (req, res, next) {
     jwt.verify(req.token, process.env.SECRET_JWT_KEY, (err, decoded) => {
       if (err) {
-        return res.sendStatus(403);
+        return res.status(403).json({ msg: "Invalid token" });
       } else {
         if (decoded.user.isSuspended === false) {
           console.log("Verified member");
