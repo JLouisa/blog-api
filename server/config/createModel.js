@@ -6,7 +6,7 @@ const createUser = async (username, password, isAdmin, isSuspended) => {
   try {
     const hashedPassword = await bcrypt.hash(password, +process.env.HASH_NUM);
     const user = new UserCollection({
-      username,
+      username: username.toLowerCase(),
       password: hashedPassword,
       isAdmin,
       isSuspended,

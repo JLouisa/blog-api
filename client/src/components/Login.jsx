@@ -24,9 +24,9 @@ function Login({ link = "/home", setIsLogin, redirect }) {
         body: JSON.stringify(userData),
       });
 
+      const data = await response.json();
       // Handle the response as needed
       if (response.ok) {
-        const data = await response.json();
         // Successful login, redirect
         console.log("login succesfull");
         localStorage.setItem("projectX", data.projectX);
@@ -35,37 +35,53 @@ function Login({ link = "/home", setIsLogin, redirect }) {
           navigateTo("/home"); // Redirect to the home after login
         }
       } else {
-        setTheErrors(response);
+        const responseData = await response.json();
+        if (responseData.data.errors) {
+          console.log(responseData.data.errors);
+          setTheErrors(responseData.data.errors);
+        } else {
+          console.error("Unexpected response format:", responseData);
+          setTheErrors(["Unexpected response format:", responseData.data.errors]);
+        }
       }
     } catch (error) {
       console.error("Error during login:", error);
       // Handle the error, display a message, or redirect if necessary
+      setTheErrors(["Error during login:", error]);
     }
   };
 
   return (
     <>
-      {theErrors.length > 0
-        ? theErrors.map((error) => {
-            return <p key={theErrors.indexOf(error)}>{error.msg}</p>;
+      {theErrors
+        ? theErrors.map((error, index) => {
+            return (
+              <p key={error.msg || index} className="errors">
+                {error.msg}
+              </p>
+            );
           })
-        : ""}
+        : null}
       <div>
         <form action={`${localHost}/login`} method="POST" onSubmit={handleSubmit}>
           <div>
             <label htmlFor="username">Username: </label>
             <br />
-            <input type="text" name="username" id="username" />
+            <input type="text" name="username" id="username" required />
           </div>
           <div>
             <label htmlFor="password">Password: </label>
             <br />
-            <input type="password" name="password" id="password" />
+            <input type="password" name="password" id="password" required />
           </div>
           <div>
-            <input type="submit" className="btn" value="login" />
+            <button type="submit" className="btn">
+              Login
+            </button>
             <Link to={link}>
-              <button className="btn">Cancel</button>
+              <button type="button" className="btn">
+                Cancel
+              </button>
             </Link>
           </div>
         </form>

@@ -4,10 +4,18 @@ import Blog from "./Blog.jsx";
 import Home from "./Home.jsx";
 import Login from "./Login.jsx";
 import SignUp from "./SignUp.jsx";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const Router = () => {
   const [isLogin, setIsLogin] = useState(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem("projectX");
+    if (token) {
+      setIsLogin(true);
+    }
+  }, []);
+
   const router = createBrowserRouter([
     {
       path: "/",
@@ -16,7 +24,10 @@ const Router = () => {
         { path: "", element: <Navigate to="/home" /> },
         { path: "/home", element: <Home isLogin={isLogin} /> },
         { path: "/signup", element: <SignUp /> },
-        { path: "/login", element: <Login isLogin={isLogin} setIsLogin={setIsLogin} redirect={true} /> },
+        {
+          path: "/login",
+          element: <Login isLogin={isLogin} setIsLogin={setIsLogin} redirect={true} />,
+        },
         { path: "/blog/:id", element: <Blog isLogin={isLogin} setIsLogin={setIsLogin} /> },
       ],
     },

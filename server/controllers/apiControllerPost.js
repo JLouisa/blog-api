@@ -23,11 +23,23 @@ exports.apiUserPost = [
     .matches(/^[a-zA-Z0-9_]*$/)
     .withMessage("Username can only contain letters, numbers, and underscores")
     .custom(async (value) => {
-      // Check if the username is in database
-      const user = await UserCollection.findOne({ username: { $regex: new RegExp(`^${value}$`, "i") } });
-      // if (user || reservedUsernames.includes(value.toLowerCase())) {
-      if (user) {
-        throw new Error();
+      try {
+        // Check if the username is in the database
+        const user = await UserCollection.findOne({ username: value.toLowerCase() });
+
+        if (user) {
+          throw new Error("Username is already taken.");
+        }
+      } catch (error) {
+        // Handle the error gracefully
+        if (error.message === "Username is already taken.") {
+          // Specific error for duplicate username
+          throw new Error("Username is already taken. Please choose a different one.");
+        } else {
+          // Handle other errors, log them, or rethrow if needed
+          console.error("Error checking username:", error);
+          throw new Error("An unexpected error occurred. Please try again later.");
+        }
       }
     })
     .withMessage("Username is unavailable. Please try another one")
@@ -65,8 +77,7 @@ exports.apiUserPost = [
       return;
     } else {
       console.log("Validation successful");
-      const hashedPassword = await bcrypt.hash(password, +process.env.HASH_NUM);
-      createUser(req.body.username, hashedPassword, false, false).catch((err) => console.log(err));
+      createUser(req.body.username, req.body.password, false, false).catch((err) => console.log(err));
       res.status(201).json({ message: "User succesfully created" });
     }
   }),
