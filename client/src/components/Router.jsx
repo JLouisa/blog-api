@@ -5,6 +5,7 @@ import Home from "./Home.jsx";
 import Login from "./Login.jsx";
 import SignUp from "./SignUp.jsx";
 import Users from "./Users.jsx";
+import Profile from "./Profile.jsx";
 import CreateBlog from "./CreateBlog.jsx";
 import getIsAdmin from "./getAdmin";
 import useBearStore from "./useBearStore";
@@ -39,6 +40,7 @@ const Router = () => {
         { path: "/home", element: <Home /> },
         { path: "/signup", element: <SignUp /> },
         { path: "/users", element: <Users /> },
+        { path: "/profile/:id", element: <Profile /> },
         { path: "/create-blog", element: <CreateBlog /> },
         {
           path: "/login",

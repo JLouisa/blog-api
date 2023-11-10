@@ -7,6 +7,8 @@ const useBearStore = create((set) => ({
   setIsAdmin: (isAdmin) => set({ isAdmin }),
   isSuspended: false,
   setIsSuspended: (isSuspended) => set({ isSuspended }),
+  userID: null,
+  setUserID: (userID) => set({ userID }),
 }));
 
 export default useBearStore;

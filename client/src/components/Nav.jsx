@@ -40,12 +40,18 @@ function Nav() {
               <Link to="/create-blog">
                 <span>Create Blog</span>
               </Link>
+              <Link to="/profile/:id">
+                <span>Profile</span>
+              </Link>
               <span onClick={logoutHandler}>
                 <a href="">Logout</a>
               </span>
             </>
           ) : (
             <>
+              <Link to="/profile/:id">
+                <span>Profile</span>
+              </Link>
               <span onClick={logoutHandler}>
                 <a href="">Logout</a>
               </span>

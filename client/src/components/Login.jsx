@@ -8,7 +8,7 @@ import useBearStore from "./useBearStore";
 function Login({ link = "/home", redirect }) {
   const [theErrors, setTheErrors] = useState([]);
   const navigateTo = useNavigate();
-  const { setIsLoggedIn, setIsAdmin } = useBearStore();
+  const { setIsLoggedIn, setIsAdmin, setUserID } = useBearStore();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -33,7 +33,8 @@ function Login({ link = "/home", redirect }) {
         console.log("login succesfull");
         localStorage.setItem("projectX", data.projectX);
         setIsLoggedIn(true);
-        setIsAdmin(data.isAdmin);
+        setIsAdmin(data.user.isAdmin);
+        setUserID(data.user.id);
         if (redirect) {
           navigateTo("/home"); // Redirect to the home after login
         }
