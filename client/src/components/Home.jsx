@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import localHost from "./localHost";
 import PropTypes from "prop-types";
 
-function Home({ isLogin }) {
+function Home() {
   const [blogs, setBlogs] = useState(0);
   const [showMore, setShowMore] = useState(5);
 
@@ -78,7 +78,6 @@ function Home({ isLogin }) {
 
 Home.propTypes = {
   setBlog: PropTypes.func,
-  isLogin: PropTypes.bool,
 };
 
 export default Home;

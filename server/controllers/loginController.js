@@ -22,21 +22,12 @@ exports.loginPost = asyncHandler(async function (req, res, next) {
       isSuspended: userData.isSuspended,
     };
 
-    // const user = {
-    //   id: 1,
-    //   username: req.body.username,
-    //   isAdmin: true,
-    //   isSuspended: false,
-    // };
-
     jwt.sign({ user: user }, process.env.SECRET_JWT_KEY, { expiresIn: "168h" }, (err, token) => {
       if (err) {
         console.error("JWT Sign Error:", err);
         return res.status(500).json({ msg: "Problem signing in" });
       }
-      res.json({
-        projectX: token,
-      });
+      res.status(200).json({ isAdmin: user.isAdmin, projectX: token });
     });
   } catch (err) {
     console.error("Couldn't setup user login:", err);

@@ -18,6 +18,19 @@ module.exports = {
       return res.sendStatus(403);
     }
   },
+  isVerified: function (req, res, next) {
+    jwt.verify(req.token, process.env.SECRET_JWT_KEY, { expiresIn: "168h" }, (err, decoded) => {
+      if (err) {
+        console.log(err);
+        return res.status(403).json({ msg: "Invalid token" });
+      }
+      if (decoded.user.isAdmin) {
+        return res.status(200).json({ isAdmin: true });
+      } else {
+        return res.status(200).json({ isAdmin: false });
+      }
+    });
+  },
   isAdmin: function (req, res, next) {
     jwt.verify(req.token, process.env.SECRET_JWT_KEY, (err, decoded) => {
       if (err) {
@@ -25,7 +38,7 @@ module.exports = {
       } else {
         if (decoded.user.isAdmin === true && decoded.user.isSuspended === false) {
           console.log("Verified");
-          req.body.id = decoded.user._id;
+          req.body.id = decoded.user.id;
           next();
         } else {
           return res.sendStatus(401);

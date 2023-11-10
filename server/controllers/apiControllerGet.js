@@ -14,6 +14,14 @@ exports.apiUserGet = asyncHandler(async function (req, res, next) {
   res.status(200).json({ data: users });
 });
 
+exports.apiUserIsAdminGet = asyncHandler(async function (req, res, next) {
+  if (req.body.isAdmin) {
+    return res.status(200).json({ isAdmin: true });
+  } else {
+    return res.status(200).json({ isAdmin: false });
+  }
+});
+
 exports.apiUserIDGet = asyncHandler(async function (req, res, next) {
   const ID = req.params.id;
   const user = await UserCollection.find({ _id: ID }).exec();

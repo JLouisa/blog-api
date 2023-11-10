@@ -6,33 +6,45 @@ import Login from "./Login.jsx";
 import SignUp from "./SignUp.jsx";
 import Users from "./Users.jsx";
 import CreateBlog from "./CreateBlog.jsx";
-import { useState, useEffect } from "react";
+import getIsAdmin from "./getAdmin";
+import useBearStore from "./useBearStore";
+import { useEffect } from "react";
 
 const Router = () => {
-  const [isLogin, setIsLogin] = useState(false);
+  const { setIsLoggedIn, setIsAdmin } = useBearStore();
 
   useEffect(() => {
-    const token = localStorage.getItem("projectX");
-    if (token) {
-      setIsLogin(true);
-    }
+    const checkIfAdmin = async () => {
+      const verified = await getIsAdmin();
+      console.log("verified");
+      console.log(verified);
+      if (verified === true) {
+        setIsLoggedIn(true);
+        setIsAdmin(true);
+      } else {
+        setIsLoggedIn(false);
+        setIsAdmin(false);
+      }
+    };
+
+    checkIfAdmin();
   }, []);
 
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <App isLogin={isLogin} />,
+      element: <App />,
       children: [
         { path: "", element: <Navigate to="/home" /> },
-        { path: "/home", element: <Home isLogin={isLogin} /> },
+        { path: "/home", element: <Home /> },
         { path: "/signup", element: <SignUp /> },
         { path: "/users", element: <Users /> },
         { path: "/create-blog", element: <CreateBlog /> },
         {
           path: "/login",
-          element: <Login isLogin={isLogin} setIsLogin={setIsLogin} redirect={true} />,
+          element: <Login redirect={true} />,
         },
-        { path: "/blog/:id", element: <Blog isLogin={isLogin} setIsLogin={setIsLogin} /> },
+        { path: "/blog/:id", element: <Blog /> },
       ],
     },
   ]);

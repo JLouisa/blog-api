@@ -1,13 +1,17 @@
 import logo from "../assets/logo.png";
-import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import useBearStore from "./useBearStore";
 
-function Nav({ isLogin, setIsLogin }) {
-  // const history = useHistory();
+function Nav() {
+  const navigateTo = useNavigate();
+  const { isLoggedIn, setIsLoggedIn, isAdmin } = useBearStore();
+
   const logoutHandler = () => {
     // Clear the JWT from localStorage
     localStorage.removeItem("projectX");
-    setIsLogin(false);
+    setIsLoggedIn(false);
+    navigateTo(`/home`); // Redirect to the home after logout
   };
 
   return (
@@ -19,7 +23,7 @@ function Nav({ isLogin, setIsLogin }) {
           <Link to="/home">
             <span>Home</span>
           </Link>
-          {isLogin === false ? (
+          {isLoggedIn === false ? (
             <>
               <Link to="/signup">
                 <span>Sign Up</span>
@@ -28,7 +32,7 @@ function Nav({ isLogin, setIsLogin }) {
                 <span>Login</span>
               </Link>
             </>
-          ) : (
+          ) : isAdmin ? (
             <>
               <Link to="/users">
                 <span>Users</span>
@@ -40,16 +44,17 @@ function Nav({ isLogin, setIsLogin }) {
                 <a href="">Logout</a>
               </span>
             </>
+          ) : (
+            <>
+              <span onClick={logoutHandler}>
+                <a href="">Logout</a>
+              </span>
+            </>
           )}
         </div>
       </nav>
     </>
   );
 }
-
-Nav.propTypes = {
-  isLogin: PropTypes.bool,
-  setIsLogin: PropTypes.func,
-};
 
 export default Nav;

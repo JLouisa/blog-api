@@ -16,52 +16,55 @@ block content
     h2 Endpoints
     h3 GET Endpoints
 
-    h4 GET /api/users
+    h4 GET /v1/api/users
     p Retrieve a list of all users along with their usernames and creation dates.
 
-    h4 GET /api/user/:id
+    h4 GET /v1/api/user/:id
     p Retrieve information about a specific user by providing their unique ID.
 
-    h4 GET /api/blogs
+    h4 GET /v1/api/blogs
     p Retrieve a list of all available blog posts.
 
-    h4 GET /api/blog/:id
+    h4 GET /v1/api/blog/:id
     p Retrieve detailed information about a specific blog post by providing its unique ID.
 
-    h4 GET /api/blog/:id/comments
+    h4 GET /v1/api/blog/:id/comments
     p Retrieve comments related to a specific blog post.
 
     h3 POST Endpoints
 
-    h4 POST /api/user
+    h4 POST /v1/api/user
     p Create a new user with a unique username and password confirmation. Ensure that the username is not already in use.
 
-    h4 POST /api/blog
+    h4 POST /v1/api/blog
     p Create a new blog post by providing a title and text content.
 
-    h4 POST /api/blog/:id/comment
+    h4 POST /v1/api/blog/:id/comment
     p Add a new comment to a specific blog post. Make sure to specify the blog's ID.
 
     h3 PUT Endpoints
 
-    h4 PUT /api/user/:id/password
+    h4 PUT /v1/api/user/:id/password
     p Update the password for a specific user. This action requires you to provide the current password for verification.
 
-    h4 PUT /api/blog/:id
+    h4 PUT /v1/user/:id/admin
+    p Update the password for a specific user. This action requires you to provide the current password for verification.
+
+    h4 PUT /v1/api/blog/:id
     p Edit an existing blog post by specifying its unique ID. You can modify the title and text of the post.
 
-    h4 PUT /api/comment/:id
+    h4 PUT /v1/api/comment/:id
     p Edit an existing comment by providing its unique ID. You can update the content of the comment.
 
     h3 DELETE Endpoints
 
-    h4 DELETE /api/user/:id
+    h4 DELETE /v1/api/user/:id
     p Delete or undelete a user by their ID. This action toggles the user's status, allowing you to suspend or reactivate user accounts.
 
-    h4 DELETE /api/blog/:id
+    h4 DELETE /v1/api/blog/:id
     p Delete or undelete a blog post by its ID. This action toggles the post's status, allowing you to hide or reveal blog posts.
 
-    h4 DELETE /api/comment/:id
+    h4 DELETE /v1/api/comment/:id
     p Delete or undelete a comment by its ID. This action toggles the comment's status, allowing you to remove or restore comments.
 
     h2 Usage
@@ -80,52 +83,52 @@ block content
     h2 API Documentation
     h3 GET Endpoints
 
-    h4 GET /api/users
+    h4 GET /v1/api/users
     p This endpoint allows you to retrieve a list of users with their usernames and creation dates. Use this to get an overview of the users in the system.
 
-    h4 GET /api/user/:id
+    h4 GET /v1/api/user/:id
     p You can fetch detailed information about a specific user by providing their unique ID. This is useful for user-specific operations.
 
-    h4 GET /api/blogs
+    h4 GET /v1/api/blogs
     p Retrieve a list of all available blog posts. This endpoint provides a comprehensive list of blogs for your users.
 
-    h4 GET /api/blog/:id
+    h4 GET /v1/api/blog/:id
     p Retrieve detailed information about a specific blog post by providing its unique ID. You can access specific blog content using this endpoint.
 
-    h4 GET /api/blog/:id/comments
+    h4 GET /v1/api/blog/:id/comments
     p Get comments related to a specific blog post. This endpoint provides a way to access and manage comments on individual blog posts.
 
     h3 POST Endpoints
 
-    h4 POST /api/user
+    h4 POST /v1/api/user
     p This endpoint enables you to create a new user by providing a unique username and a matching password confirmation. Ensure that the chosen username is not already in use to prevent conflicts.
 
-    h4 POST /api/blog
+    h4 POST /v1/api/blog
     p Create a new blog post by specifying a title and text content. This endpoint allows you to add fresh content to your blog platform.
 
-    h4 POST /api/blog/:id/comment
+    h4 POST /v1/api/blog/:id/comment
     p You can add a new comment to a specific blog post by specifying the blog's ID. Engage your users by enabling them to comment on your blog posts.
 
     h3 PUT Endpoints
 
-    h4 PUT /api/user/:id/password
+    h4 PUT /v1/api/user/:id/password
     p Update a user's password by providing the current password for verification. This ensures secure password changes.
 
-    h4 PUT /api/blog/:id
+    h4 PUT /v1/api/blog/:id
     p Edit an existing blog post by specifying its unique ID. You can modify the title and text content to keep your blog content up to date.
 
-    h4 PUT /api/comment/:id
+    h4 PUT /v1/api/comment/:id
     p Edit an existing comment by providing its unique ID. This allows you to update the content of the comment for improved discussions.
 
     h3 DELETE Endpoints
 
-    h4 DELETE /api/user/:id
+    h4 DELETE /v1/api/user/:id
     p This endpoint allows you to delete or undelete a user by specifying their ID. You can suspend or reactivate user accounts as needed.
 
-    h4 DELETE /api/blog/:id
+    h4 DELETE /v1/api/blog/:id
     p Delete or undelete a blog post by specifying its ID. Use this endpoint to hide or reveal blog posts as required.
 
-    h4 DELETE /api/comment/:id
+    h4 DELETE /v1/api/comment/:id
     p Delete or undelete a comment by specifying its ID. You can remove or restore comments to manage the conversation on your blog posts.
 
-    p This comprehensive API documentation will help you make the most of the Blog API for your web application.
+    h5 This comprehensive API documentation will help you make the most of the Odin Blog API.

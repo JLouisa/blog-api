@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { isAuth, isAdmin, isMember } = require("../config/auth");
+const { isAuth, isVerified, isAdmin, isMember } = require("../config/auth");
 const apiControllerGet = require("../controllers/apiControllerGet");
 const apiControllerPost = require("../controllers/apiControllerPost");
 const apiControllerPut = require("../controllers/apiControllerPut");
@@ -10,6 +10,8 @@ const apiControllerDelete = require("../controllers/apiControllerDelete");
 
 // GET
 router.get("/users", isAuth, isAdmin, apiControllerGet.apiUserGet);
+router.get("/user/admin", isAuth, isVerified);
+// router.get("/user/admin", isVerified, apiControllerGet.apiUserIsAdminGet);
 router.get("/user/:id", apiControllerGet.apiUserIDGet);
 router.get("/blogs", apiControllerGet.apiBlogsGet);
 router.get("/blog/:id/comments", apiControllerGet.apiCommentGet);

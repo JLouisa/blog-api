@@ -3,10 +3,12 @@ import PropTypes from "prop-types";
 import localHost from "./localHost";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import useBearStore from "./useBearStore";
 
-function Login({ link = "/home", setIsLogin, redirect }) {
+function Login({ link = "/home", redirect }) {
   const [theErrors, setTheErrors] = useState([]);
   const navigateTo = useNavigate();
+  const { setIsLoggedIn, setIsAdmin } = useBearStore();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -30,7 +32,8 @@ function Login({ link = "/home", setIsLogin, redirect }) {
         // Successful login, redirect
         console.log("login succesfull");
         localStorage.setItem("projectX", data.projectX);
-        setIsLogin(true);
+        setIsLoggedIn(true);
+        setIsAdmin(data.isAdmin);
         if (redirect) {
           navigateTo("/home"); // Redirect to the home after login
         }
@@ -92,7 +95,6 @@ function Login({ link = "/home", setIsLogin, redirect }) {
 
 Login.propTypes = {
   link: PropTypes.string,
-  setIsLogin: PropTypes.func,
   redirect: PropTypes.bool,
 };
 
