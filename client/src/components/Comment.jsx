@@ -44,7 +44,6 @@ Comment.propTypes = {
   comments: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
   id: PropTypes.string,
   deleteComment: PropTypes.func,
-  setIsLogin: PropTypes.func,
 };
 
 export default Comment;

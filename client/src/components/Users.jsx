@@ -19,15 +19,13 @@ function Users() {
       const response = await fetch(`${localHost}/v1/api/users`, requestOptions);
       if (response.ok) {
         const data = await response.json();
-        console.log("data");
-        console.log(data);
         setUsers(data.data);
       } else {
         const errorData = response.json();
         setErrors(errorData.errors);
       }
     } catch (err) {
-      console.log("Error getting user information");
+      console.error("Error getting user information");
     }
   };
 
@@ -53,7 +51,7 @@ function Users() {
         setErrors(errorData.errors);
       }
     } catch (err) {
-      console.log("Error getting user information");
+      console.error("Error getting user information");
     }
   };
 
@@ -75,7 +73,7 @@ function Users() {
         setErrors(errorData.errors);
       }
     } catch (err) {
-      console.log("Error getting user information");
+      console.error("Error getting user information");
     }
   };
 
@@ -101,7 +99,6 @@ function Users() {
                   <button
                     className="btn"
                     onClick={() => {
-                      console.log("Promote", user._id);
                       promoteUser(user._id);
                     }}
                   >
@@ -113,7 +110,6 @@ function Users() {
                   <button
                     className="btn"
                     onClick={() => {
-                      console.log("Ban", user._id);
                       banUser(user._id);
                     }}
                   >

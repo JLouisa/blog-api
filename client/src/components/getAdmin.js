@@ -4,8 +4,7 @@ const getIsAdmin = async () => {
   const token = localStorage.getItem("projectX");
 
   if (!token) {
-    console.log("No token found");
-    return false;
+    return [false, false];
   }
 
   try {
@@ -27,7 +26,7 @@ const getIsAdmin = async () => {
     }
   } catch (err) {
     console.error("Error during fetch:", err);
-    return false;
+    return [false, false];
   }
 };
 

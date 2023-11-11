@@ -22,7 +22,6 @@ function Blog() {
         },
       });
       const blogComments = await blogCommentsData.json();
-      console.log(blogComments.data);
       setBlog(blogComments.data[0]);
       setComments(blogComments.data[1]);
     } catch (error) {
@@ -38,7 +37,6 @@ function Blog() {
   if (blog === 0) return <div>Loading...</div>;
 
   const deleteBlog = async (id) => {
-    console.log("Delete Blog ", id);
     try {
       await fetch(`${localHost}/v1/api/blog/${id}`, {
         method: "DELETE",
@@ -55,7 +53,6 @@ function Blog() {
   };
 
   const deleteComment = async (id) => {
-    console.log("Delete Comment ", id);
     try {
       await fetch(`${localHost}/v1/api/comment/${id}`, {
         method: "DELETE",

@@ -21,8 +21,6 @@ function CommentCreate({ blogID, comments }) {
     event.preventDefault();
     const commentText = document.getElementById("commentText").value;
     const userData = { commentText };
-    console.log("userData");
-    console.log(userData);
 
     try {
       const token = localStorage.getItem("projectX");
@@ -37,12 +35,9 @@ function CommentCreate({ blogID, comments }) {
 
       // Handle the response as needed
       if (response.ok) {
-        const data = await response.json();
+        await response.json();
         const redirect = true;
         // Successful sign-up, redirect
-        console.log("Comment created succesfull");
-        console.log(response);
-        console.log(data);
         if (redirect) {
           navigateTo(`/blog/${blogID}`); // Redirect
           window.location.reload(true);
@@ -50,7 +45,6 @@ function CommentCreate({ blogID, comments }) {
       } else {
         const responseData = await response.json();
         if (responseData.data.errors) {
-          console.log(responseData.data.errors);
           setTheErrors(responseData.data.errors);
         } else {
           console.error("Unexpected response format:", responseData);
@@ -115,7 +109,6 @@ function CommentCreate({ blogID, comments }) {
 CommentCreate.propTypes = {
   blogID: PropTypes.string,
   comments: PropTypes.array,
-  setIsLogin: PropTypes.func,
 };
 
 export default CommentCreate;

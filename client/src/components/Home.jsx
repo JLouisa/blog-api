@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import localHost from "./localHost";
-import PropTypes from "prop-types";
 import useBearStore from "./useBearStore";
 
 function Home() {
@@ -34,7 +33,6 @@ function Home() {
       if (response.ok) {
         const data = await response.json();
         setBlogs(data.data);
-        console.log(data);
       } else {
         throw new Error("API call failed");
       }
@@ -84,9 +82,5 @@ function Home() {
     </section>
   );
 }
-
-Home.propTypes = {
-  setBlog: PropTypes.func,
-};
 
 export default Home;

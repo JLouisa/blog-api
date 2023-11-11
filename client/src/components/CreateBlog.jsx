@@ -13,8 +13,6 @@ function CreateBlog() {
     const blogTitle = document.getElementById("title").value;
     const blogText = data;
     const userData = { blogTitle, blogText };
-    console.log("userData");
-    console.log(userData);
 
     try {
       const token = localStorage.getItem("projectX");
@@ -32,9 +30,6 @@ function CreateBlog() {
         const data = await response.json();
         const redirect = true;
         // Successful sign-up, redirect
-        console.log("Blog created succesfull");
-        console.log(response);
-        console.log(data);
         if (redirect) {
           const blog = data.data;
           navigateTo(`/blog/${blog._id}`); // Redirect to the home after sign-up
@@ -42,7 +37,6 @@ function CreateBlog() {
       } else {
         const responseData = await response.json();
         if (responseData.data.errors) {
-          console.log(responseData.data.errors);
           setTheErrors(responseData.data.errors);
         } else {
           console.error("Unexpected response format:", responseData);

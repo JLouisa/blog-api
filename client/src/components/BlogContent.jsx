@@ -1,4 +1,3 @@
-// BlogContent.js
 import PropTypes from "prop-types";
 import TextFormatter from "./TextFormatter";
 

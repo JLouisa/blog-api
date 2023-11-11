@@ -26,19 +26,15 @@ function SignUp() {
 
       // Handle the response as needed
       if (response.ok) {
-        const data = await response.json();
+        await response.json();
         const redirect = true;
         // Successful sign-up, redirect
-        console.log("Sign-up succesfull");
-        console.log(response);
-        console.log(data);
         if (redirect) {
           navigateTo("/login"); // Redirect to the home after sign-up
         }
       } else {
         const responseData = await response.json();
         if (responseData.data.errors) {
-          console.log(responseData.data.errors);
           setTheErrors(responseData.data.errors);
         } else {
           console.error("Unexpected response format:", responseData);

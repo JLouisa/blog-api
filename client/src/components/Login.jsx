@@ -30,7 +30,6 @@ function Login({ link = "/home", redirect }) {
       // Handle the response as needed
       if (response.ok) {
         // Successful login, redirect
-        console.log("login succesfull");
         localStorage.setItem("projectX", data.projectX);
         setIsLoggedIn(true);
         setIsAdmin(data.user.isAdmin);
@@ -41,7 +40,6 @@ function Login({ link = "/home", redirect }) {
       } else {
         const responseData = await response.json();
         if (responseData.data.errors) {
-          console.log(responseData.data.errors);
           setTheErrors(responseData.data.errors);
         } else {
           console.error("Unexpected response format:", responseData);

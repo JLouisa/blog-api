@@ -7,7 +7,6 @@ function BlogEditor({ submitHandler }) {
   const log = () => {
     if (editorRef.current) {
       submitHandler(editorRef.current.getContent());
-      // console.log(editorRef.current.getContent());
     }
   };
   return (
@@ -55,7 +54,6 @@ function BlogEditor({ submitHandler }) {
 }
 
 BlogEditor.propTypes = {
-  setText: PropTypes.func,
   submitHandler: PropTypes.func,
 };
 

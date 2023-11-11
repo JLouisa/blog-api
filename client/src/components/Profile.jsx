@@ -12,7 +12,7 @@ function Profile() {
     const token = localStorage.getItem("projectX");
 
     if (!token) {
-      console.log("No token found");
+      console.error("No token found");
       return false;
     }
 
@@ -29,13 +29,11 @@ function Profile() {
 
       if (response.ok) {
         const data = await response.json();
-        console.log(`data.data`);
-        console.log(data.data);
         setUser(data.data);
         setIsAdmin(data.data.isAdmin);
       }
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
   };
 
@@ -61,7 +59,7 @@ function Profile() {
         setErrors(errorData.errors);
       }
     } catch (err) {
-      console.log("Error getting user information");
+      console.error("Error getting user information");
     }
   };
 
