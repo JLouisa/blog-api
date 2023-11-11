@@ -6,6 +6,7 @@ const { body, validationResult } = require("express-validator");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv").config();
 const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 
 // Init fake DB
 const mockDB = require("../database/mockDB");
@@ -226,5 +227,43 @@ exports.apiUserIDAdminPutToggle = asyncHandler(async function (req, res, next) {
   } catch (error) {
     console.error("Error toggling user admin promotion:", error);
     res.status(500).json({ message: "Internal server error" });
+  }
+});
+
+exports.apiUserIDAdminPutPromoteToggle = asyncHandler(async function (req, res, next) {
+  try {
+    const ID = req.body.id;
+    const userData = await UserCollection.findOne({ _id: ID }, "_id username createdDate isAdmin isSuspended").exec();
+    if (!userData) {
+      return res.status(404).json({ msg: "User not found" });
+    }
+
+    // Toggle the user's isAdmin property
+    userData.isAdmin = !userData.isAdmin;
+    await userData.save();
+
+    // Creating user info for token
+    const user = {
+      id: userData._id,
+      username: userData.username,
+      isAdmin: userData.isAdmin,
+      isSuspended: userData.isSuspended,
+    };
+
+    jwt.sign({ user: user }, process.env.SECRET_JWT_KEY, { expiresIn: "168h" }, (err, token) => {
+      if (err) {
+        console.error("JWT Sign Error:", err);
+        return res.status(500).json({ msg: "Problem assigning admin privileges" });
+      }
+      console.log(token);
+      if (user.isAdmin) {
+        return res.status(200).json({ isAdmin: true, projectX: token });
+      } else {
+        return res.status(200).json({ isAdmin: false, projectX: token });
+      }
+    });
+  } catch (err) {
+    console.error("Couldn't setup user login:", err);
+    res.status(500).json({ msg: "Problem assigning admin privilege" });
   }
 });

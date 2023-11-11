@@ -22,7 +22,7 @@ module.exports = {
     jwt.verify(req.token, process.env.SECRET_JWT_KEY, { expiresIn: "168h" }, (err, decoded) => {
       if (err) {
         console.error(err);
-        return res.status(403).json({ msg: "Invalid token" });
+        return res.status(404).json({ msg: "Invalid token" });
       }
       req.body.isAdmin = decoded.user.isAdmin;
       req.body.id = decoded.user.id;
@@ -30,9 +30,9 @@ module.exports = {
     });
   },
   isAdmin: function (req, res, next) {
-    jwt.verify(req.token, process.env.SECRET_JWT_KEY, (err, decoded) => {
+    jwt.verify(req.token, process.env.SECRET_JWT_KEY, { expiresIn: "168h" }, (err, decoded) => {
       if (err) {
-        return res.sendStatus(403);
+        return res.sendStatus(405);
       } else {
         if (decoded.user.isAdmin === true && decoded.user.isSuspended === false) {
           req.body.id = decoded.user.id;
@@ -44,9 +44,9 @@ module.exports = {
     });
   },
   isMember: function (req, res, next) {
-    jwt.verify(req.token, process.env.SECRET_JWT_KEY, (err, decoded) => {
+    jwt.verify(req.token, process.env.SECRET_JWT_KEY, { expiresIn: "168h" }, (err, decoded) => {
       if (err) {
-        return res.status(403).json({ msg: "Invalid token" });
+        return res.status(406).json({ msg: "Invalid token" });
       } else {
         if (decoded.user.isSuspended === false) {
           req.body.id = decoded.user.id;

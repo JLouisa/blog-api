@@ -24,6 +24,7 @@ router.post("/blog/:id/comment", isAuth, isMember, apiControllerPost.apiCommentP
 
 // PUT
 router.put("/user/:id/password", apiControllerPut.apiUserIDPassPut); //Needs to be updated
+router.put("/user/:id/admin/toggle", isAuth, isVerified, apiControllerPut.apiUserIDAdminPutPromoteToggle); //Needs to be updated
 router.put("/user/:id/admin", apiControllerPut.apiUserIDAdminPutToggle); //Needs to be updated
 router.put("/blog/:id", apiControllerPut.apiBlogIDPut);
 router.put("/comment/:id", apiControllerPut.apiCommentIDPut);
