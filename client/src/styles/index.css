@@ -162,6 +162,16 @@ textarea:focus {
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
+.deleteBlog {
+  justify-self: end;
+  align-self: end;
+  text-align: right;
+}
+
+.deleted {
+  color: crimson;
+}
+
 .btn {
   display: inline-block;
   padding: 10px 20px;

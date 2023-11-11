@@ -9,7 +9,7 @@ const CommentCollection = require("../models/commentModel");
 const mockDB = require("../database/mockDB");
 const db = mockDB.createMockDB();
 
-exports.apiUserGet = asyncHandler(async function (req, res, next) {
+exports.apiUsersGet = asyncHandler(async function (req, res, next) {
   const users = await UserCollection.find({}, "username createdDate isAdmin isSuspended").exec();
   res.status(200).json({ data: users });
 });

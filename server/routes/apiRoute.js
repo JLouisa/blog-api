@@ -10,7 +10,7 @@ const apiControllerDelete = require("../controllers/apiControllerDelete");
 
 // GET
 router.get("/user/admin", isAuth, isVerified);
-router.get("/users", isAuth, isAdmin, apiControllerGet.apiUserGet);
+router.get("/users", isAuth, isAdmin, apiControllerGet.apiUsersGet);
 router.get("/user", isAuth, isMember, apiControllerGet.apiUserGet);
 router.get("/user/:id", apiControllerGet.apiUserIDGet);
 router.get("/blogs", apiControllerGet.apiBlogsGet);

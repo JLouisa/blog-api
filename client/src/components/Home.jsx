@@ -2,10 +2,12 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import localHost from "./localHost";
 import PropTypes from "prop-types";
+import useBearStore from "./useBearStore";
 
 function Home() {
   const [blogs, setBlogs] = useState(0);
   const [showMore, setShowMore] = useState(5);
+  const { isAdmin } = useBearStore();
 
   const blogLength = (title) => {
     let newTitle = title;
@@ -41,23 +43,30 @@ function Home() {
   }, []);
 
   const theBlogs = (blogs) => {
+    // Check if blogs is an array
+    if (!Array.isArray(blogs)) {
+      console.error("Blogs is not an array:", blogs);
+      return null;
+    }
+
     const visibleBlogs = blogs.slice(0, showMore);
 
-    return (
-      <>
-        {visibleBlogs.map((blog) => (
-          <div key={blog._id} className="blogs">
-            <Link to={"/blog/" + blog._id}>
-              <p>{blog.title}</p>
-              <>{blogLength(blog.text)}</>
-            </Link>
-          </div>
-        ))}
-      </>
+    const renderBlog = (blog) => (
+      <div key={blog._id} className="blogs">
+        <Link to={"/blog/" + blog._id}>
+          <p>
+            {blog.title}
+            <span className="deleted">{blog.isHidden ? " (deleted)" : ""}</span>
+          </p>
+          <>{blogLength(blog.text)}</>
+        </Link>
+      </div>
     );
+
+    return <>{visibleBlogs.map((blog) => (blog.isHidden === false || isAdmin === true ? renderBlog(blog) : null))}</>;
   };
 
-  if (blogs === 0) return <p>Loading Blogs...</p>;
+  if (!Array.isArray(blogs) || blogs.length === 0) return <p>Loading Blogs...</p>;
 
   return (
     <section>

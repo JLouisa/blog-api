@@ -3,11 +3,12 @@ import PropTypes from "prop-types";
 import Login from "./Login";
 import localHost from "./localHost";
 import { useNavigate } from "react-router-dom";
+import useBearStore from "./useBearStore";
 
-function CommentCreate({ blogID, comments, isLogin, setIsLogin }) {
-  console.log(isLogin);
+function CommentCreate({ blogID, comments }) {
   const navigateTo = useNavigate();
   const [theErrors, setTheErrors] = useState([]);
+  const { isLoggedIn } = useBearStore();
 
   const [showCommentArea, setShowCommentArea] = useState(false);
 
@@ -74,10 +75,10 @@ function CommentCreate({ blogID, comments, isLogin, setIsLogin }) {
       </>
     );
   }
-  if (isLogin === false) {
+  if (isLoggedIn === false) {
     return (
       <>
-        <Login link={`/blog/${blogID}`} setIsLogin={setIsLogin} redirect={false} />
+        <Login link={`/blog/${blogID}`} redirect={false} />
       </>
     );
   }
@@ -114,7 +115,6 @@ function CommentCreate({ blogID, comments, isLogin, setIsLogin }) {
 CommentCreate.propTypes = {
   blogID: PropTypes.string,
   comments: PropTypes.array,
-  isLogin: PropTypes.bool,
   setIsLogin: PropTypes.func,
 };
 

@@ -3,13 +3,13 @@ import CommentCreate from "./CommentCreate";
 import formattedDate from "./formattedDate";
 import userProfile from "../assets/profile-user3.png";
 
-function Comment({ id, comments, isLogin, setIsLogin }) {
+function Comment({ id, comments, deleteComment }) {
   if (comments === 0) return <div>Loading...</div>;
 
   return (
     <>
       <div>
-        <CommentCreate blogID={id} comments={comments} isLogin={isLogin} setIsLogin={setIsLogin} />
+        <CommentCreate blogID={id} comments={comments} />
       </div>
       {comments.map((comment) => {
         return (
@@ -17,8 +17,14 @@ function Comment({ id, comments, isLogin, setIsLogin }) {
             <img src={userProfile} className="commentProfile" />
             <p className="commentTitle">
               {comment.createdByUser.username} - {formattedDate(comment.createdDate)}
+              <span className="deleted">{comment.isHidden ? " (Deleted)" : ""}</span>
             </p>
             <p className="commentText">{comment.text}</p>
+            <div>
+              <button className="btn" onClick={() => deleteComment(comment._id)}>
+                {comment.isHidden ? "Undelete" : "Delete"}
+              </button>
+            </div>
           </div>
         );
       })}
@@ -29,7 +35,7 @@ function Comment({ id, comments, isLogin, setIsLogin }) {
 Comment.propTypes = {
   comments: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
   id: PropTypes.string,
-  isLogin: PropTypes.bool,
+  deleteComment: PropTypes.func,
   setIsLogin: PropTypes.func,
 };
 

@@ -6,8 +6,6 @@ function Users() {
   const [users, setUsers] = useState([]);
   const [errors, setErrors] = useState([]);
 
-  let succesMsg = "";
-
   const getUsers = async () => {
     try {
       const token = localStorage.getItem("projectX");
@@ -49,8 +47,6 @@ function Users() {
       };
       const response = await fetch(`${localHost}/v1/api/user/${id}`, requestOptions);
       if (response.ok) {
-        const data = await response.json();
-        succesMsg = data.message;
         getUsers();
       } else {
         const errorData = response.json();
@@ -73,8 +69,6 @@ function Users() {
       };
       const response = await fetch(`${localHost}/v1/api/user/${id}/admin`, requestOptions);
       if (response.ok) {
-        const data = await response.json();
-        succesMsg = data.message;
         getUsers();
       } else {
         const errorData = response.json();
@@ -96,39 +90,40 @@ function Users() {
             );
           })
         : null}
-      {succesMsg}
-      {users.map((user) => {
-        return (
-          <div key={user._id} className="userSection">
-            <p>{user.username}</p>
-            <p>{formattedDate(user.createdDate)}</p>
-            <div className="adminBtn">
-              <span>Admin: {user.isAdmin ? "Yes" : "No"} - </span>
-              <button
-                className="btn"
-                onClick={() => {
-                  console.log("Promote", user._id);
-                  promoteUser(user._id);
-                }}
-              >
-                Promote
-              </button>
-            </div>
-            <div className="banBtn">
-              <span>Banned: {user.isSuspended ? "Yes" : "No"} - </span>
-              <button
-                className="btn"
-                onClick={() => {
-                  console.log("Ban", user._id);
-                  banUser(user._id);
-                }}
-              >
-                Ban
-              </button>
-            </div>
-          </div>
-        );
-      })}
+      {users
+        ? users.map((user) => {
+            return (
+              <div key={user._id} className="userSection">
+                <p>{user.username}</p>
+                <p>{formattedDate(user.createdDate)}</p>
+                <div className="adminBtn">
+                  <span>Admin: {user.isAdmin ? "Yes" : "No"} - </span>
+                  <button
+                    className="btn"
+                    onClick={() => {
+                      console.log("Promote", user._id);
+                      promoteUser(user._id);
+                    }}
+                  >
+                    Promote
+                  </button>
+                </div>
+                <div className="banBtn">
+                  <span>Banned: {user.isSuspended ? "Yes" : "No"} - </span>
+                  <button
+                    className="btn"
+                    onClick={() => {
+                      console.log("Ban", user._id);
+                      banUser(user._id);
+                    }}
+                  >
+                    Ban
+                  </button>
+                </div>
+              </div>
+            );
+          })
+        : "Loading..."}
     </section>
   );
 }
