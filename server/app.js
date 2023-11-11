@@ -7,12 +7,25 @@ const dotenv = require("dotenv").config();
 const { connectToDatabase } = require("./config/mongDB");
 const bcrypt = require("bcryptjs");
 const cors = require("cors");
+const compression = require("compression");
+const RateLimit = require("express-rate-limit");
+const helmet = require("helmet");
 
+// Route import
 const indexRouter = require("./routes/indexRoute");
 const apiRouter = require("./routes/apiRoute");
 const usersRouter = require("./routes/usersRoute");
 
 const app = express();
+// Compress all routes
+app.use(compression());
+
+const limiter = RateLimit({
+  windowMs: 1 * 60 * 1000, // 1 minute
+  max: 50,
+});
+// Apply rate limiter to all requests
+app.use(limiter);
 
 // init MongoDB Database
 connectToDatabase();
@@ -22,6 +35,7 @@ app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "pug");
 
 app.use(cors());
+app.use(helmet());
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

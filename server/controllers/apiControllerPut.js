@@ -18,10 +18,10 @@ exports.apiUserIDPassPut = [
     .notEmpty()
     .withMessage("Password must not be empty")
     .trim()
-    // .matches(/^(?=.*[a-zA-Z])(?=.*\d)(?=.*[\W_]).{3,20}$/)
-    // .withMessage(
-    //   "Password must include at least one letter, one digit, one special character, and be between 3 and 20 characters"
-    // )
+    .matches(/^(?=.*[a-zA-Z])(?=.*\d)(?=.*[\W_]).{3,20}$/)
+    .withMessage(
+      "Password must include at least one letter, one digit, one special character, and be between 3 and 20 characters"
+    )
     .custom(async (value, { req }) => {
       // Check if the username is in database
       const user = await UserCollection.findOne({ _id: req.params.id });
@@ -45,10 +45,10 @@ exports.apiUserIDPassPut = [
     .notEmpty()
     .withMessage("New password must not be empty")
     .trim()
-    // .matches(/^(?=.*[a-zA-Z])(?=.*\d)(?=.*[\W_]).{3,20}$/)
-    // .withMessage(
-    //   "Password must include at least one letter, one digit, one special character, and be between 3 and 20 characters"
-    // )
+    .matches(/^(?=.*[a-zA-Z])(?=.*\d)(?=.*[\W_]).{3,20}$/)
+    .withMessage(
+      "Password must include at least one letter, one digit, one special character, and be between 3 and 20 characters"
+    )
     .escape(),
 
   // Process request after validation and sanitization.
