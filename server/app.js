@@ -10,6 +10,7 @@ const cors = require("cors");
 const compression = require("compression");
 const RateLimit = require("express-rate-limit");
 const helmet = require("helmet");
+const morgan = require("morgan");
 
 // Route import
 const indexRouter = require("./routes/indexRoute");
@@ -37,6 +38,7 @@ app.set("view engine", "pug");
 app.use(cors());
 app.use(helmet());
 app.use(logger("dev"));
+app.use(morgan("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
