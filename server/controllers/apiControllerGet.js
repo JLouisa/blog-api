@@ -15,7 +15,9 @@ exports.apiUsersGet = asyncHandler(async function (req, res, next) {
 });
 
 exports.apiUserIsAdminGet = asyncHandler(async function (req, res, next) {
-  if (req.body.isAdmin) {
+  const ID = req.body.id;
+  const user = await UserCollection.findOne({ _id: ID }, "_id username createdDate isAdmin isSuspended").exec();
+  if (user.isAdmin) {
     return res.status(200).json({ isAdmin: true });
   } else {
     return res.status(200).json({ isAdmin: false });

@@ -17,14 +17,16 @@ const Router = () => {
   useEffect(() => {
     const checkIfAdmin = async () => {
       const verified = await getIsAdmin();
-      console.log("verified");
-      console.log(verified);
-      if (verified === true) {
-        setIsLoggedIn(true);
-        setIsAdmin(true);
+      setIsAdmin(verified[0]);
+      if (verified[0]) {
+        setIsLoggedIn(verified[0]);
       } else {
-        setIsLoggedIn(false);
-        setIsAdmin(false);
+        const token = localStorage.getItem("projectX");
+        if (token) {
+          setIsLoggedIn(true);
+        } else {
+          setIsLoggedIn(false);
+        }
       }
     };
 

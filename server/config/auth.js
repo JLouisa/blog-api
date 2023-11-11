@@ -24,11 +24,10 @@ module.exports = {
         console.log(err);
         return res.status(403).json({ msg: "Invalid token" });
       }
-      if (decoded.user.isAdmin) {
-        return res.status(200).json({ isAdmin: true });
-      } else {
-        return res.status(200).json({ isAdmin: false });
-      }
+      console.log("Verified");
+      req.body.isAdmin = decoded.user.isAdmin;
+      req.body.id = decoded.user.id;
+      next();
     });
   },
   isAdmin: function (req, res, next) {

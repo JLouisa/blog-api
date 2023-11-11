@@ -56,7 +56,7 @@ function Home() {
         <Link to={"/blog/" + blog._id}>
           <p>
             {blog.title}
-            <span className="deleted">{blog.isHidden ? " (deleted)" : ""}</span>
+            <span className="deleted">{blog.isHidden ? " (Deleted)" : ""}</span>
           </p>
           <>{blogLength(blog.text)}</>
         </Link>

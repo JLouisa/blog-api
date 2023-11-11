@@ -4,11 +4,13 @@ import PropTypes from "prop-types";
 import { useParams } from "react-router-dom";
 import localHost from "./localHost";
 import BlogContent from "./BlogContent";
+import useBearStore from "./useBearStore";
 
 function Blog() {
   const { id } = useParams();
   const [blog, setBlog] = useState(0);
   const [comments, setComments] = useState(0);
+  const { isAdmin } = useBearStore();
 
   const getComments = async () => {
     try {
@@ -73,9 +75,11 @@ function Blog() {
     <>
       <section className="blog-post">
         <div className="deleteBlog">
-          <button className="btn" onClick={() => deleteBlog(id)}>
-            {blog[0].isHidden ? "Undelete Blog" : "Delete Blog"}
-          </button>
+          {isAdmin && (
+            <button className="btn" onClick={() => deleteBlog(id)}>
+              {blog[0].isHidden ? "Undelete Blog" : "Delete Blog"}
+            </button>
+          )}
         </div>
         <div className="blog-content">
           <h2>
