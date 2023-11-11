@@ -7,7 +7,6 @@ const UserCollection = require("../models/userModel");
 const { body, validationResult } = require("express-validator");
 
 exports.loginPost = asyncHandler(async function (req, res, next) {
-  console.log(req.body.username);
   try {
     const userData = await UserCollection.findOne({ username: req.body.username });
     // If user was not found

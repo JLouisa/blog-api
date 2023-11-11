@@ -191,6 +191,25 @@ textarea:focus {
   background-color: #0056b3;
 }
 
+.btn2 {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #ff0000;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none;
+  text-align: center;
+  font-size: 16px;
+  font-weight: bold;
+  margin: 0.2em;
+}
+
+.btn2:hover {
+  background-color: #b30000;
+}
+
 .blogText {
   border-bottom: 1px solid var(--frameColor);
   padding: 2em;

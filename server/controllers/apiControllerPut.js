@@ -68,7 +68,6 @@ exports.apiUserIDPassPut = [
       });
       return;
     } else {
-      console.log("Validation successful");
       const hashedPassword = await bcrypt.hash(req.body.newPassword, +process.env.HASH_NUM);
       try {
         const updatedDoc = await UserCollection.findOneAndUpdate(
@@ -78,10 +77,9 @@ exports.apiUserIDPassPut = [
         );
 
         if (!updatedDoc) {
-          console.log("Password not updated");
+          console.error("Password not updated");
           res.status(404).json({ message: "Password not updated" });
         } else {
-          console.log("Password updated:", updatedDoc);
           res.status(201).json({ message: "Password successfully updated" });
         }
       } catch (err) {
@@ -127,7 +125,6 @@ exports.apiBlogIDPut = [
       });
       return;
     } else {
-      console.log("Validation successful");
       try {
         // Get the blog
         const blog = await BlogCollection.findOne({ _id: req.params.id });
@@ -187,7 +184,6 @@ exports.apiCommentIDPut = [
       });
       return;
     } else {
-      console.log("Validation successful");
       try {
         // Get the comment
         const comment = await CommentCollection.findOne({ _id: req.params.id });

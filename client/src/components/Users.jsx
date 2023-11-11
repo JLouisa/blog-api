@@ -97,23 +97,23 @@ function Users() {
                 <div className="adminBtn">
                   <span>Admin: {user.isAdmin ? "Yes" : "No"} - </span>
                   <button
-                    className="btn"
+                    className={user.isAdmin ? "btn2" : "btn"}
                     onClick={() => {
                       promoteUser(user._id);
                     }}
                   >
-                    Promote
+                    {user.isAdmin ? "Remove" : "Promote"}
                   </button>
                 </div>
                 <div className="banBtn">
                   <span>Banned: {user.isSuspended ? "Yes" : "No"} - </span>
                   <button
-                    className="btn"
+                    className={user.isSuspended ? "btn" : "btn2"}
                     onClick={() => {
                       banUser(user._id);
                     }}
                   >
-                    Ban
+                    {user.isSuspended ? "Unban" : "Ban"}
                   </button>
                 </div>
               </div>

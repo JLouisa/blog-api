@@ -21,10 +21,9 @@ module.exports = {
   isVerified: function (req, res, next) {
     jwt.verify(req.token, process.env.SECRET_JWT_KEY, { expiresIn: "168h" }, (err, decoded) => {
       if (err) {
-        console.log(err);
+        console.error(err);
         return res.status(403).json({ msg: "Invalid token" });
       }
-      console.log("Verified");
       req.body.isAdmin = decoded.user.isAdmin;
       req.body.id = decoded.user.id;
       next();
@@ -36,7 +35,6 @@ module.exports = {
         return res.sendStatus(403);
       } else {
         if (decoded.user.isAdmin === true && decoded.user.isSuspended === false) {
-          console.log("Verified");
           req.body.id = decoded.user.id;
           next();
         } else {
@@ -51,7 +49,6 @@ module.exports = {
         return res.status(403).json({ msg: "Invalid token" });
       } else {
         if (decoded.user.isSuspended === false) {
-          console.log("Verified member");
           req.body.id = decoded.user.id;
           next();
         } else {

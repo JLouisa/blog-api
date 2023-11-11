@@ -76,8 +76,7 @@ exports.apiUserPost = [
       });
       return;
     } else {
-      console.log("Validation successful");
-      createUser(req.body.username, req.body.password, false, false).catch((err) => console.log(err));
+      createUser(req.body.username, req.body.password, false, false).catch((err) => console.error(err));
       res.status(201).json({ message: "User succesfully created" });
     }
   }),
@@ -118,7 +117,6 @@ exports.apiBlogPost = [
       });
       return;
     } else {
-      console.log("Validation successful");
       const newBlog = new BlogCollection({
         title: req.body.blogTitle,
         text: req.body.blogText,
@@ -167,9 +165,6 @@ exports.apiCommentPost = [
       });
       return;
     } else {
-      console.log("Validation successful");
-      console.log("req.body");
-      console.log(req.body);
       const newComment = new CommentCollection({
         text: req.body.commentText,
         createdByUser: req.body.id,

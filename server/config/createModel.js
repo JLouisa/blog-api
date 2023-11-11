@@ -12,7 +12,6 @@ const createUser = async (username, password, isAdmin, isSuspended) => {
       isSuspended,
     });
     await user.save();
-    console.log(`User created: ${username}`);
   } catch (err) {
     console.error(`Error creating user: ${username}`, err);
   }
