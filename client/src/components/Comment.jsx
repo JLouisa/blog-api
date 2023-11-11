@@ -34,7 +34,11 @@ function Comment({ id, comments, deleteComment }) {
         <CommentCreate blogID={id} comments={comments} />
       </div>
       {comments.map((comment) => {
-        return <>{comment.isHidden === false || isAdmin === true ? visibleComments(comment) : null}</>;
+        return (
+          <div key={comment._id}>
+            {comment.isHidden === false || isAdmin === true ? visibleComments(comment) : null}
+          </div>
+        );
       })}
     </>
   );
