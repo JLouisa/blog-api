@@ -51,7 +51,7 @@ exports.loginPost = [
             input: {
               username: req.body.username,
             },
-            errors: ["User doesn't exsist."],
+            errors: { msg: ["User doesn't exsist."] },
           },
         });
       }
@@ -62,7 +62,7 @@ exports.loginPost = [
             input: {
               username: req.body.username,
             },
-            errors: ["Incorrect password. Try again."],
+            errors: { msg: ["Incorrect password. Try again."] },
           },
         });
       }
@@ -75,7 +75,7 @@ exports.loginPost = [
             input: {
               username: req.body.username,
             },
-            errors: ["Incorrect password. Try again."],
+            errors: { msg: ["Incorrect password. Try again."] },
           },
         });
       } else {
@@ -86,7 +86,7 @@ exports.loginPost = [
             input: {
               username: req.body.username,
             },
-            errors: ["Incorrect password. Try again!"],
+            errors: { msg: ["Incorrect password. Try again."] },
           },
         });
       }
@@ -101,7 +101,7 @@ exports.loginPost = [
             input: {
               username: req.body.username,
             },
-            errors: ["User not found"],
+            errors: { msg: ["User not found"] },
           },
         });
       }
@@ -121,7 +121,7 @@ exports.loginPost = [
               input: {
                 username: req.body.username,
               },
-              errors: ["Problem signing in"],
+              errors: { msg: ["Problem signing in"] },
             },
           });
         }
@@ -134,7 +134,7 @@ exports.loginPost = [
           input: {
             username: req.body.username,
           },
-          errors: ["Problem signing in"],
+          errors: { msg: ["Problem signing in"] },
         },
       });
     }
@@ -147,7 +147,7 @@ exports.logoutPost = asyncHandler(async function (req, res, next) {
       input: {
         username: req.body.username,
       },
-      errors: ["User not found"],
+      errors: { msg: ["User not found"] },
     },
   });
 });
