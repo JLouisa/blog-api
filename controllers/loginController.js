@@ -96,7 +96,14 @@ exports.loginPost = [
       const userData = await UserCollection.findOne({ username: req.body.username });
       // If user was not found
       if (!userData) {
-        return res.status(400).json({ msg: "User not found" });
+        return res.status(400).json({
+          data: {
+            input: {
+              username: req.body.username,
+            },
+            errors: ["User not found"],
+          },
+        });
       }
       // Creating user info for token
       const user = {
@@ -109,17 +116,38 @@ exports.loginPost = [
       jwt.sign({ user: user }, process.env.SECRET_JWT_KEY, { expiresIn: "168h" }, (err, token) => {
         if (err) {
           console.error("JWT Sign Error:", err);
-          return res.status(500).json({ msg: "Problem signing in" });
+          return res.status(500).json({
+            data: {
+              input: {
+                username: req.body.username,
+              },
+              errors: ["Problem signing in"],
+            },
+          });
         }
         res.status(200).json({ user: { id: user.id, isAdmin: user.isAdmin }, projectX: token });
       });
     } catch (err) {
       console.error("Couldn't setup user login:", err);
-      res.status(500).json({ msg: "Problem signing in" });
+      res.status(500).json({
+        data: {
+          input: {
+            username: req.body.username,
+          },
+          errors: ["Problem signing in"],
+        },
+      });
     }
   }),
 ];
 
 exports.logoutPost = asyncHandler(async function (req, res, next) {
-  return res.status(400).json({ msg: "User not found" });
+  return res.status(400).json({
+    data: {
+      input: {
+        username: req.body.username,
+      },
+      errors: ["User not found"],
+    },
+  });
 });
