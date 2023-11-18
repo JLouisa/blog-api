@@ -16,6 +16,7 @@ const morgan = require("morgan");
 const indexRouter = require("./routes/indexRoute");
 const apiRouter = require("./routes/apiRoute");
 const usersRouter = require("./routes/usersRoute");
+const waldoRouter = require("./routes/waldo/waldoRoute");
 
 const app = express();
 // Compress all routes
@@ -47,6 +48,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/", indexRouter);
 app.use("/v1/api", apiRouter);
 app.use("/users", usersRouter);
+app.use("/waldo", waldoRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
