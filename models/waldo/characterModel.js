@@ -3,8 +3,8 @@ const Schema = mongoose.Schema;
 
 const CharacterSchema = new Schema({
   character: { type: String, required: true },
-  locationX: { type: Number, required: true },
-  locationX: { type: Number, required: true },
+  posX: { type: [Number], required: true },
+  posY: { type: [Number], required: true },
   map: { type: String, required: true },
 });
 

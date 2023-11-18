@@ -2,13 +2,13 @@ const express = require("express");
 const router = express.Router();
 const waldoController = require("../../controllers/waldo/waldoController");
 
-/* GET home page. */
-router.get("/character", waldoController.characterGet);
+/* GET 3 random characters page. */
+router.get("/character/:id/map", waldoController.characterGet);
 
-/* POST login */
+/* Get leaderboard */
 router.get("/leaderboard", waldoController.leaderboardGet);
 
-/* POST Logout */
+/* POST leaderboard player */
 router.post("/leaderboard", waldoController.leaderboardPost);
 
 module.exports = router;
