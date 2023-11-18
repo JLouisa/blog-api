@@ -3,7 +3,7 @@ const router = express.Router();
 const waldoController = require("../../controllers/waldo/waldoController");
 
 /* GET 3 random characters page. */
-router.get("/character/:id/map", waldoController.characterGet);
+router.get("/character/:id", waldoController.characterGet);
 
 /* Get leaderboard */
 router.get("/leaderboard", waldoController.leaderboardGet);

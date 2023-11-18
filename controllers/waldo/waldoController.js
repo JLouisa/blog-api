@@ -8,7 +8,6 @@ const CharacterCollection = require("../../models/waldo/characterModel");
 exports.characterGet = asyncHandler(async function (req, res, next) {
   const ID = req.params.id;
   const randomCharacters = await CharacterCollection.aggregate([{ $match: { map: ID } }, { $sample: { size: 3 } }]);
-  console.log(randomCharacters);
   res.status(200).json({ data: randomCharacters });
 });
 
