@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const CharacterSchema = new Schema({
-  character: { type: String, required: true },
+  character: { type: String, required: true, unique: true },
   posX: { type: [Number], required: true },
   posY: { type: [Number], required: true },
   map: { type: String, required: true },
