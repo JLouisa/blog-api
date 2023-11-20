@@ -8,7 +8,7 @@ const CharacterCollection = require("../../models/waldo/characterModel");
 exports.characterGet = asyncHandler(async function (req, res, next) {
   const ID = req.params.id;
   const randomCharacters = await CharacterCollection.aggregate([{ $match: { map: ID } }, { $sample: { size: 3 } }]);
-  res.status(200).json({ data: randomCharacters });
+  res.status(200).json({ data: randomCharacters, ok: "ok" });
 });
 
 exports.leaderboardGet = asyncHandler(async function (req, res, next) {
@@ -18,8 +18,12 @@ exports.leaderboardGet = asyncHandler(async function (req, res, next) {
       PlayerCollection.find({ map: "pokemonMap" }).sort({ score: 1 }).exec(),
       PlayerCollection.find({ map: "disneyMap" }).sort({ score: 1 }).exec(),
     ]);
-    const leaderboard = [rickMortyMap, pokemonMap, disneyMap];
-    res.status(200).json({ data: leaderboard });
+    const leaderboard = [
+      { map: disneyMap, name: "Disney Waldo" },
+      { map: rickMortyMap, name: "Rick & Morty Waldo" },
+      { map: pokemonMap, name: "Pokemon Waldo" },
+    ];
+    res.status(200).json({ data: leaderboard, ok: "ok" });
   } catch (error) {
     console.error("Error in leaderboardGet:", error);
     res.status(500).json({ data: ["Problem retrieving leaderboard"] });
